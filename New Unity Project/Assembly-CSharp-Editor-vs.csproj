@@ -92,25 +92,25 @@
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.6/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.ClipperLib">
- <HintPath>C:/Users/Andy/Documents/New Unity Project/Assets/AstarPathfindingProject/Plugins/Clipper/Pathfinding.ClipperLib.dll</HintPath>
+ <HintPath>C:/Users/Andy/Documents/Visual Studio 2015/Projects/GameServer/New Unity Project/Assets/AstarPathfindingProject/Plugins/Clipper/Pathfinding.ClipperLib.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.Ionic.Zip.Reduced">
- <HintPath>C:/Users/Andy/Documents/New Unity Project/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+ <HintPath>C:/Users/Andy/Documents/Visual Studio 2015/Projects/GameServer/New Unity Project/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.JsonFx">
- <HintPath>C:/Users/Andy/Documents/New Unity Project/Assets/AstarPathfindingProject/Plugins/JsonFx/Pathfinding.JsonFx.dll</HintPath>
+ <HintPath>C:/Users/Andy/Documents/Visual Studio 2015/Projects/GameServer/New Unity Project/Assets/AstarPathfindingProject/Plugins/JsonFx/Pathfinding.JsonFx.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.Poly2Tri">
- <HintPath>C:/Users/Andy/Documents/New Unity Project/Assets/AstarPathfindingProject/Plugins/Poly2Tri/Pathfinding.Poly2Tri.dll</HintPath>
+ <HintPath>C:/Users/Andy/Documents/Visual Studio 2015/Projects/GameServer/New Unity Project/Assets/AstarPathfindingProject/Plugins/Poly2Tri/Pathfinding.Poly2Tri.dll</HintPath>
  </Reference>
  <Reference Include="NetInterface">
- <HintPath>C:/Users/Andy/Documents/New Unity Project/Assets/Plugins/NetInterface.dll</HintPath>
+ <HintPath>C:/Users/Andy/Documents/Visual Studio 2015/Projects/GameServer/New Unity Project/Assets/Plugins/NetInterface.dll</HintPath>
  </Reference>
  <Reference Include="RemotingServerClient">
- <HintPath>C:/Users/Andy/Documents/New Unity Project/Assets/Plugins/RemotingServerClient.dll</HintPath>
+ <HintPath>C:/Users/Andy/Documents/Visual Studio 2015/Projects/GameServer/New Unity Project/Assets/Plugins/RemotingServerClient.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Remoting">
- <HintPath>C:/Users/Andy/Documents/New Unity Project/Assets/Plugins/System.Runtime.Remoting.dll</HintPath>
+ <HintPath>C:/Users/Andy/Documents/Visual Studio 2015/Projects/GameServer/New Unity Project/Assets/Plugins/System.Runtime.Remoting.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>

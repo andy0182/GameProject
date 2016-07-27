@@ -10,7 +10,8 @@ namespace Pathfinding {
 	 * 
 	 * \astarpro
 	 */
-	public class TileHandlerHelper : MonoBehaviour {
+	public class TileHandlerHelper : System.Runtime.Remoting.CoroutineManager
+    {
 		
 		TileHandler handler;
 		
@@ -51,9 +52,7 @@ namespace Pathfinding {
 		}
 
 		void Start () {
-			if (FindObjectsOfType(typeof(TileHandlerHelper)).Length > 1) {
-				Debug.LogError ("There should only be one TileHandlerHelper per scene. Destroying.");
-				Destroy (this);
+			if (FindObjectsOfType<TileHandlerHelper>().Length > 1) {
 				return;
 			}
 			
@@ -119,12 +118,11 @@ namespace Pathfinding {
 			forcedReloadBounds.Clear();
 	
 			for (int i=0;i<cuts.Count;i++) {
-				if (cuts[i].enabled) {
 					if (cuts[i].RequiresUpdate()) {
 						handler.ReloadInBounds (cuts[i].LastBounds);
 						handler.ReloadInBounds (cuts[i].GetBounds());
 					}
-				} else if (cuts[i].RequiresUpdate()) {
+				if (cuts[i].RequiresUpdate()) {
 					handler.ReloadInBounds (cuts[i].LastBounds);
 				}
 			}

@@ -27,9 +27,12 @@ namespace Pathfinding {
 	 * cut away the NavmeshAdd object.
 	 * Then you can add links between the added geometry and the rest of the world, preferably using NodeLink3.
 	 */
-	public class NavmeshAdd : MonoBehaviour {
-	
-		public enum MeshType {
+	public class NavmeshAdd : System.Runtime.Remoting.CoroutineManager
+    {
+
+        public Transform transform;
+
+        public enum MeshType {
 			Rectangle,
 			CustomMesh
 		}
@@ -45,12 +48,12 @@ namespace Pathfinding {
 		}
 		
 		/** Get all active instances which intersect the bounds */
-		public static List<NavmeshAdd> GetAllInRange(Bounds b) {
+		public static List<NavmeshAdd> GetAllInRange(Bounds b)
+        {
 			List<NavmeshAdd> cuts = Pathfinding.Util.ListPool<NavmeshAdd>.Claim ();
-			for (int i=0;i<allCuts.Count;i++) {
-				if (allCuts[i].enabled && Intersects(b, allCuts[i].GetBounds())) {
-					cuts.Add (allCuts[i]);
-				}
+			for (int i=0;i<allCuts.Count;i++)
+            {
+				cuts.Add (allCuts[i]);
 			}
 			return cuts;
 		}

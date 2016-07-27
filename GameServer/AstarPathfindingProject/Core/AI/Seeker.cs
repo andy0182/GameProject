@@ -10,7 +10,7 @@ using System.Diagnostics;
  * It also handles post-processing of paths using modifiers.
  * \see \ref calling-pathfinding
  */
-public class Seeker : MonoBehaviour, ISerializationCallbackReceiver {
+public class Seeker : System.Runtime.Remoting.CoroutineManager, ISerializationCallbackReceiver {
 
 	//====== SETTINGS ======
 
@@ -233,7 +233,6 @@ public class Seeker : MonoBehaviour, ISerializationCallbackReceiver {
 			var mMod = modifiers[i] as MonoModifier;
 
 			// Ignore modifiers which are not enabled
-			if (mMod != null && !mMod.enabled) continue;
 
 			switch (pass) {
 			case ModifierPass.PreProcess:

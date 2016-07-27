@@ -576,55 +576,6 @@ But this time, edit the setting named "Forward" to "Z forward" (not -Z as it is 
 			var cachedVertices = new Dictionary<Mesh, Vector3[]>();
 			var cachedTris = new Dictionary<Mesh, int[]>();
 
-			// Create an ExtraMesh object
-			// for each RecastMeshObj
-			for (int i=0;i<buffer2.Count;i++) {
-				MeshFilter filter = buffer2[i].GetMeshFilter();
-				Renderer rend = filter != null ? filter.GetComponent<Renderer>() : null;
-
-				if (filter != null && rend != null) {
-					Mesh mesh = filter.sharedMesh;
-
-					var smesh = new ExtraMesh();
-					smesh.matrix = rend.localToWorldMatrix;
-					smesh.original = filter;
-					smesh.area = buffer2[i].area;
-
-					// Don't read the vertices and triangles from the
-					// mesh if we have seen the same mesh previously
-					if (cachedVertices.ContainsKey (mesh)) {
-						smesh.vertices = cachedVertices[mesh];
-						smesh.triangles = cachedTris[mesh];
-					} else {
-						smesh.vertices = mesh.vertices;
-						smesh.triangles = mesh.triangles;
-						cachedVertices[mesh] = smesh.vertices;
-						cachedTris[mesh] = smesh.triangles;
-					}
-
-					smesh.bounds = rend.bounds;
-
-					buffer.Add (smesh);
-				} else {
-					Collider coll = buffer2[i].GetCollider();
-
-					if (coll == null) {
-						Debug.LogError ("RecastMeshObject ("+buffer2[i].gameObject.name +") didn't have a collider or MeshFilter+Renderer attached");
-						continue;
-					}
-
-					ExtraMesh smesh = RasterizeCollider (coll);
-					smesh.area = buffer2[i].area;
-
-					//Make sure a valid ExtraMesh was returned
-					if (smesh.vertices != null) buffer.Add(smesh);
-				}
-			}
-
-			//Clear cache to avoid memory leak
-			capsuleCache.Clear();
-
-			Util.ListPool<RecastMeshObj>.Release (buffer2);
 		}
 
 		static void GetSceneMeshes (Bounds bounds, List<string> tagMask, LayerMask layerMask, List<ExtraMesh> meshes) {
@@ -639,9 +590,7 @@ But this time, edit the setting named "Forward" to "Z forward" (not -Z as it is 
 					Renderer rend = filter.GetComponent<Renderer>();
 
 					if (rend != null && filter.sharedMesh != null && rend.enabled && (((1 << filter.gameObject.layer) & layerMask) != 0 || tagMask.Contains (filter.tag))) {
-						if (filter.GetComponent<RecastMeshObj>() == null) {
 							filteredFilters.Add (filter);
-						}
 					}
 				}
 

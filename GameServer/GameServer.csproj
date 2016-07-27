@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -46,10 +46,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NetInterface">
-      <HintPath>..\..\..\..\New Unity Project\Assets\Plugins\NetInterface.dll</HintPath>
+    <Reference Include="NetInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\New Unity Project\Assets\Plugins\NetInterface.dll</HintPath>
     </Reference>
     <Reference Include="Pathfinding.ClipperLib">
       <HintPath>..\..\WindowsFormsApplication1\WindowsFormsApplication1\AstarPathfindingProject\Plugins\Clipper\Pathfinding.ClipperLib.dll</HintPath>
@@ -65,7 +67,7 @@
     </Reference>
     <Reference Include="RemotingServerClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\New Unity Project\Assets\Plugins\RemotingServerClient.dll</HintPath>
+      <HintPath>..\New Unity Project\Assets\Plugins\RemotingServerClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -95,7 +97,6 @@
     <Compile Include="AstarPathfindingProject\Core\AstarData.cs" />
     <Compile Include="AstarPathfindingProject\Core\AstarMath.cs" />
     <Compile Include="AstarPathfindingProject\Core\AstarPath.cs" />
-    <Compile Include="AstarPathfindingProject\Core\GraphUpdateScene.cs" />
     <Compile Include="AstarPathfindingProject\Core\GraphUpdateShape.cs" />
     <Compile Include="AstarPathfindingProject\Core\Misc\AnimationLink.cs" />
     <Compile Include="AstarPathfindingProject\Core\Misc\AstarDebugger.cs" />

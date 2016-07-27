@@ -5,7 +5,8 @@ using UnityEditor;
 #endif
 
 [ExecuteInEditMode]
-public class NavMeshRenderer : MonoBehaviour {
+public class NavMeshRenderer : System.Runtime.Remoting.CoroutineManager
+{
 	
 	/** Last level loaded. Used to check for scene switches */
 	string lastLevel = "";

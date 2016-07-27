@@ -163,13 +163,7 @@ namespace Pathfinding {
 #else
 			graphs = new NavGraph[0];
 #endif
-			/* End default values */
-			
-			if (cacheStartup && file_cachedStartup != null) {
-				LoadFromCache ();
-			} else {
-				DeserializeGraphs ();
-			}
+			DeserializeGraphs ();
 		}
 		
 		/** Updates shortcuts to the first graph of different types.
@@ -289,14 +283,14 @@ namespace Pathfinding {
 						sr.CloseDeserialize();
 						UpdateShortcuts ();
 					} else {
-						Debug.Log ("Invalid data file (cannot read zip).\nThe data is either corrupt or it was saved using a 3.0.x or earlier version of the system");
+						//Debug.Log ("Invalid data file (cannot read zip).\nThe data is either corrupt or it was saved using a 3.0.x or earlier version of the system");
 					}
 				} else {
 					throw new System.ArgumentNullException ("bytes");
 				}
 				active.VerifyIntegrity ();
 			} catch (System.Exception e) {
-				Debug.LogWarning ("Caught exception while deserializing data.\n"+e);
+				//Debug.LogWarning ("Caught exception while deserializing data.\n"+e);
 				data_backup = bytes;
 			}
 			

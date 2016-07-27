@@ -11,7 +11,8 @@ using Pathfinding;
  * \note It does only work on Navmesh based graphs (NavMeshGraph, RecastGraph)
  * \note It does not work very well with links in the graphs
  */
-public class NavmeshController : MonoBehaviour {
+public class NavmeshController : System.Runtime.Remoting.CoroutineManager
+{
 #if FALSE
 	/** Factor applied to \a direction during SimpleMove.
 	 * A small value decreases corner cutting, a high value makes it take edges further away into account */

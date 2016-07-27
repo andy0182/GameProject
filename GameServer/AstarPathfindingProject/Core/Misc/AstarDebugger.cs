@@ -34,7 +34,8 @@ using Pathfinding;
  * 
  * \todo Add field showing how many graph updates are being done right now
  */
-public class AstarDebugger : MonoBehaviour {
+public class AstarDebugger : System.Runtime.Remoting.CoroutineManager
+{
 	
 	public int yOffset = 5;
 	
@@ -92,20 +93,6 @@ public class AstarDebugger : MonoBehaviour {
 	
 	public void Start () {
 		
-		useGUILayout = false;
-		
-		fpsDrops = new float[fpsDropCounterSize];
-
-		cam = GetComponent<Camera>();
-		if (cam == null) {
-			cam = Camera.main;
-		}
-		
-		graph = new GraphPoint[graphBufferSize];
-		
-		for (int i=0;i<fpsDrops.Length;i++) {
-			fpsDrops[i] = 1F / Time.deltaTime;
-		}
 	}
 	
 	int maxVecPool = 0;

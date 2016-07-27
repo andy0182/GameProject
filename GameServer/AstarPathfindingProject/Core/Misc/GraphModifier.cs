@@ -8,8 +8,9 @@ namespace Pathfinding {
 	 * So make sure your code handles both cases well. You may choose to ignore editor events.
 	 * \see Application.IsPlaying
 	 */
-	public abstract class GraphModifier : MonoBehaviour {
-		
+	public abstract class GraphModifier : System.Runtime.Remoting.CoroutineManager
+    {
+        public Transform transform;
 		/** All active graph modifiers */
 		private static GraphModifier root;
 		
@@ -17,7 +18,7 @@ namespace Pathfinding {
 		private GraphModifier next;
 		
 		public static void FindAllModifiers () {
-			var arr = FindObjectsOfType(typeof(GraphModifier)) as GraphModifier[];
+			var arr = FindObjectsOfType<GraphModifier>();
 			for (int i=0;i<arr.Length;i++) {
 				arr[i].OnEnable();
 			}

@@ -5,7 +5,6 @@ using Pathfinding;
 using Pathfinding.Util;
 
 namespace Pathfinding {
-	[AddComponentMenu ("Pathfinding/Modifiers/Simple Smooth")]
 	[System.Serializable]
 	/** Modifier which smooths the path. This modifier can smooth a path by either moving the points closer together (Simple) or using Bezier curves (Bezier).\n
 	 * \ingroup modifiers

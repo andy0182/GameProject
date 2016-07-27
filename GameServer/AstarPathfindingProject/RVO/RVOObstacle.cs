@@ -17,8 +17,9 @@ namespace Pathfinding.RVO {
 	 * 
 	 * \astarpro 
 	 */
-	public abstract class RVOObstacle : MonoBehaviour {
-		
+	public abstract class RVOObstacle : System.Runtime.Remoting.CoroutineManager
+    {
+        public Transform transform;
 		/** Mode of the obstacle.
 		 * Determines winding order of the vertices */
 		public ObstacleVertexWinding obstacleMode;
@@ -225,7 +226,7 @@ namespace Pathfinding.RVO {
 		 * \throws System.InvalidOperationException When no RVOSimulator could be found.
 		 */
 		protected void FindSimulator () {
-			RVOSimulator rvosim = FindObjectOfType(typeof(RVOSimulator)) as RVOSimulator;
+			RVOSimulator rvosim = FindObjectOfType<RVOSimulator>();
 			if (rvosim == null) throw new System.InvalidOperationException ("No RVOSimulator could be found in the scene. Please add one to any GameObject");
 			
 			sim = rvosim.GetSimulator ();

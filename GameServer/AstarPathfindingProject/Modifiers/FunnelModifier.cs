@@ -4,7 +4,6 @@ using Pathfinding;
 using Pathfinding.Util;
 
 namespace Pathfinding {
-	[AddComponentMenu ("Pathfinding/Modifiers/Funnel")]
 	[System.Serializable]
 	/** Simplifies paths on navmesh graphs using the funnel algorithm.
 	 * The funnel algorithm is an algorithm which can, given a path corridor with nodes in the path where the nodes have an area, like triangles, it can find the shortest path inside it.

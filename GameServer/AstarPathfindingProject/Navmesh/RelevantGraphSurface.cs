@@ -9,9 +9,9 @@ namespace Pathfinding {
 	 * \see Pathfinding.RecastGraph.relevantGraphSurfaceMode
 	 * 
 	 */
-	[AddComponentMenu("Pathfinding/Navmesh/RelevantGraphSurface")]
-	public class RelevantGraphSurface : MonoBehaviour {
-		
+	public class RelevantGraphSurface : System.Runtime.Remoting.CoroutineManager
+    {
+        public Transform transform;
 		private static RelevantGraphSurface root;
 		
 		public float maxRange = 1;
@@ -76,7 +76,7 @@ namespace Pathfinding {
 		}
 		
 		public static void FindAllGraphSurfaces () {
-			var srf = GameObject.FindObjectsOfType(typeof(RelevantGraphSurface)) as RelevantGraphSurface[];
+			var srf = FindObjectsOfType<RelevantGraphSurface>();
 			for (int i=0;i<srf.Length;i++) {
 				srf[i].OnDisable ();
 				srf[i].OnEnable ();

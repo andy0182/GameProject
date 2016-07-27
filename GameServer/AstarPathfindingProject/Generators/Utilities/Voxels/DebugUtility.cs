@@ -6,7 +6,8 @@ namespace Pathfinding {
 	 * Helper for drawing debug information for the recast graph.
 	 * \astarpro
 	 */
-	public class DebugUtility : MonoBehaviour {
+	public class DebugUtility : System.Runtime.Remoting.CoroutineManager
+    {
 
 		public Material defaultMaterial;
 
@@ -27,7 +28,6 @@ namespace Pathfinding {
 		public static void DrawCubes (Vector3[] topVerts, Vector3[] bottomVerts, Color[] vertexColors, float width) {
 
 			if (active == null) {
-				active = GameObject.FindObjectOfType(typeof(DebugUtility)) as DebugUtility;
 			}
 			if (active == null) throw new System.NullReferenceException ();
 

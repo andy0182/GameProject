@@ -5,7 +5,7 @@ using System.Runtime.Remoting;
 
 namespace AnimFollow
 {
-	public class ragdollHitByBullet_AF : MonoBehaviour
+	public class ragdollHitByBullet_AF : UnityEngine.MonoBehaviour
 	{
 		// This script should be added to the root containing the ragdoll
 

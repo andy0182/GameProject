@@ -77,7 +77,7 @@ namespace Pathfinding {
 	/** Base class for path modifiers which can be attached to GameObjects.
 	  * \see[AddComponentMenu("CONTEXT/Seeker/Something")] Modifier */
 	[System.Serializable]
-	public abstract class MonoModifier : MonoBehaviour, IPathModifier {
+	public abstract class MonoModifier : System.Runtime.Remoting.CoroutineManager, IPathModifier {
 
 		public void OnEnable () {}
 		public void OnDisable () {}
@@ -104,13 +104,6 @@ namespace Pathfinding {
 
 		/** Alerts the Seeker that this modifier exists */
 		public void Awake () {
-#if !PhotonImplementation
-			seeker = GetComponent<Seeker>();
-#endif
-
-			if (seeker != null) {
-				seeker.RegisterModifier (this);
-			}
 		}
 
 		public void OnDestroy () {

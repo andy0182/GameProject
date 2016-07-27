@@ -9,7 +9,6 @@ namespace Pathfinding.RVO {
 	 * 
 	 * \astarpro 
 	 */
-	[AddComponentMenu("Pathfinding/Local Avoidance/Square Obstacle")]
 	public class RVOSquareObstacle : RVOObstacle {
 		
 		/** Height of the obstacle */

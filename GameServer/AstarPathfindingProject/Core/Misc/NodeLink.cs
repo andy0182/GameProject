@@ -23,10 +23,8 @@ namespace Pathfinding {
 		
 		/** Delete existing connection instead of adding one */
 		public bool deleteConnection = false;
-		
-		public Transform Start {
-			get { return transform; }
-		}
+
+        public Transform Start;
 		
 		public Transform End {
 			get { return end; }

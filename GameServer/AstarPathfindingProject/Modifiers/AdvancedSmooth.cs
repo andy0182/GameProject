@@ -4,7 +4,6 @@ using UnityEngine;
 using Pathfinding;
 
 namespace Pathfinding {
-	[AddComponentMenu ("Pathfinding/Modifiers/Advanced Smooth")]
 	[System.Serializable]
 	/** \ingroup modifiers
 	 * Smoothing by dividing path into turns and straight segments.

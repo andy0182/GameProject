@@ -23,7 +23,19 @@ namespace System.Runtime.Remoting
             }
         }
     }
-    public class CoroutineManager
+    public class MonoBehaviour
+    {
+        static List<MonoBehaviour> ObjectPools = new List<MonoBehaviour>();
+        public static T[] FindObjectsOfType<T>()
+        {
+            return ObjectPools.FindAll(a => a is T).ToArray() as T[];
+        }
+        public static T FindObjectOfType<T>() where T: MonoBehaviour
+        {
+            return ObjectPools.Find(a => a is T) as T;
+        }
+    }
+    public class CoroutineManager : MonoBehaviour
     {
         List<IEnumerator> AddEnumeratos = new List<IEnumerator>();
         List<IEnumerator> m_enumerators = new List<IEnumerator>();

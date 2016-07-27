@@ -34,13 +34,14 @@ using Pathfinding.RVO;
  */
 [RequireComponent(typeof(Seeker))]
 [AddComponentMenu("Pathfinding/AI/AIPath (generic)")]
-public class AIPath : MonoBehaviour {
-
-	/** Determines how often it will search for new paths.
+public class AIPath : System.Runtime.Remoting.CoroutineManager
+{
+    public Transform transform;
+    /** Determines how often it will search for new paths.
 	 * If you have fast moving targets or AIs, you might want to set it to a lower value.
 	 * The value is in seconds between path requests.
 	 */
-	public float repathRate = 0.5F;
+    public float repathRate = 0.5F;
 
 	/** Target to move towards.
 	 * The AI will try to follow/move towards this target.
@@ -151,17 +152,11 @@ public class AIPath : MonoBehaviour {
 	 * If you override this function you should in most cases call base.Awake () at the start of it.
 	  * */
 	protected virtual void Awake () {
-		seeker = GetComponent<Seeker>();
 
 		//This is a simple optimization, cache the transform component lookup
 		tr = transform;
 
 		//Cache some other components (not all are necessarily there)
-		controller = GetComponent<CharacterController>();
-		navController = GetComponent<NavmeshController>();
-		rvoController = GetComponent<RVOController>();
-		if ( rvoController != null ) rvoController.enableRotation = false;
-		rigid = GetComponent<Rigidbody>();
 	}
 
 	/** Starts searching for paths.

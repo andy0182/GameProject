@@ -8,7 +8,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Reflection;
 
-public class ApplicationControol : MonoBehaviour 
+public class ApplicationControol : UnityEngine.MonoBehaviour 
 {
 	public GameObject[] PrefabEntityObject;
 	public QueueEX<System.Runtime.Remoting.Action> Queues = new QueueEX<System.Runtime.Remoting.Action>();

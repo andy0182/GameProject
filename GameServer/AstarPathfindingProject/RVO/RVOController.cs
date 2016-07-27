@@ -19,9 +19,9 @@ namespace Pathfinding.RVO {
 	 *
 	 * \astarpro
 	 */
-	[AddComponentMenu("Pathfinding/Local Avoidance/RVO Controller")]
-	public class RVOController : MonoBehaviour {
-
+	public class RVOController : System.Runtime.Remoting.CoroutineManager
+    {
+        public Transform transform;
 		/** Radius of the agent */
 		[Tooltip("Radius of the agent")]
 		public float radius = 5;
@@ -161,7 +161,7 @@ namespace Pathfinding.RVO {
 		public void Awake () {
 			tr = transform;
 
-			var sim = FindObjectOfType(typeof(RVOSimulator)) as RVOSimulator;
+			var sim = FindObjectOfType<RVOSimulator>();
 			if (sim == null) {
 				Debug.LogError ("No RVOSimulator component found in the scene. Please add one.");
 				return;

@@ -22,7 +22,8 @@ namespace Pathfinding {
 	 * This will reduce the performance improvement over 'Rasterize Meshes' but is still faster.
 	 */
 	[AddComponentMenu("Pathfinding/Navmesh/RecastMeshObj")]
-	public class RecastMeshObj : MonoBehaviour {
+	public class RecastMeshObj : System.Runtime.Remoting.CoroutineManager
+    {
 		
 		/** Static objects are stored in a tree for fast bounds lookups */
 		protected static RecastBBTree tree = new RecastBBTree();
@@ -33,7 +34,7 @@ namespace Pathfinding {
 		/** Fills the buffer with all RecastMeshObjs which intersect the specified bounds */
 		public static void GetAllInBounds (List<RecastMeshObj> buffer, Bounds bounds) {
 			if (!Application.isPlaying){
-				RecastMeshObj[] objs = FindObjectsOfType(typeof(RecastMeshObj)) as RecastMeshObj[];
+				RecastMeshObj[] objs = FindObjectsOfType<RecastMeshObj>();
 				for (int i=0;i<objs.Length;i++) {
 					objs[i].RecalculateBounds();
 					if (objs[i].GetBounds ().Intersects (bounds)) {
@@ -44,7 +45,7 @@ namespace Pathfinding {
 			} else if (Time.timeSinceLevelLoad == 0) {
 				//Is is not guaranteed that all RecastMeshObj OnEnable functions have been called, so if it is the first frame since loading a new level
 				//try to initialize all RecastMeshObj objects.
-				RecastMeshObj[] objs = FindObjectsOfType(typeof(RecastMeshObj)) as RecastMeshObj[];
+				RecastMeshObj[] objs = FindObjectsOfType<RecastMeshObj>();
 				for (int i=0;i<objs.Length;i++) objs[i].Register();
 			}
 			
@@ -110,21 +111,8 @@ namespace Pathfinding {
 			//Clamp area, upper limit isn't really a hard limit, but if it gets much higher it will start to interfere with other stuff
 			area = Mathf.Clamp (area,-1,1 << 25);
 			
-			Renderer rend = GetComponent<Renderer>();
-			
-			Collider coll = GetComponent<Collider>();
-			if (rend == null && coll == null) throw new System.Exception ("A renderer or a collider should be attached to the GameObject");
-			
-			MeshFilter filter = GetComponent<MeshFilter>();
-			
-			if (rend != null && filter == null) throw new System.Exception ("A renderer was attached but no mesh filter");
 			
 			//Default to renderer
-			if (rend != null) {
-				bounds = rend.bounds;
-			} else {
-				bounds = coll.bounds;
-			}
 			
 			_dynamic = dynamic;
 			if (_dynamic) {
@@ -135,22 +123,8 @@ namespace Pathfinding {
 		}
 		
 		/** Recalculates the internally stored bounds of the object */
-		private void RecalculateBounds () {
-			Renderer rend = GetComponent<Renderer>();
-			
-			Collider coll = GetCollider();
-			if (rend == null && coll == null) throw new System.Exception ("A renderer or a collider should be attached to the GameObject");
-			
-			MeshFilter filter = GetComponent<MeshFilter>();
-			
-			if (rend != null && filter == null) throw new System.Exception ("A renderer was attached but no mesh filter");
-			
-			//Default to renderer
-			if (rend != null) {
-				bounds = rend.bounds;
-			} else {
-				bounds = coll.bounds;
-			}
+		private void RecalculateBounds ()
+        {
 		}
 		
 		/** Bounds completely enclosing the mesh for this object */
@@ -161,13 +135,6 @@ namespace Pathfinding {
 			return bounds;
 		}
 		
-		public MeshFilter GetMeshFilter () {
-			return GetComponent<MeshFilter>();
-		}
-		
-		public Collider GetCollider () {
-			return GetComponent<Collider>();
-		}
 		
 		void OnDisable () {
 			

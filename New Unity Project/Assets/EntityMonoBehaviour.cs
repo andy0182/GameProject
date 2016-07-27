@@ -6,7 +6,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting;
 
 
-public class EntityMonoBehaviour : MonoBehaviour
+public class EntityMonoBehaviour : UnityEngine.MonoBehaviour
 {
 	public EntityData entity;
 	void Awake()

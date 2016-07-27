@@ -16,8 +16,8 @@ namespace Pathfinding.RVO {
 	 *
 	 * \astarpro
 	 */
-	[AddComponentMenu("Pathfinding/Local Avoidance/RVO Simulator")]
-	public class RVOSimulator : MonoBehaviour {
+	public class RVOSimulator : System.Runtime.Remoting.CoroutineManager
+    {
 
 		/** Calculate local avoidance in between frames.
 		 * If this is enabled and multithreading is used, the local avoidance calculations will continue to run

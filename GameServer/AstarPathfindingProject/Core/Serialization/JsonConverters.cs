@@ -42,20 +42,6 @@ namespace Pathfinding.Serialization
 			}
 			
 			if (values.ContainsKey ("GUID")) {
-				string guid = (string)values["GUID"];
-				
-				var helpers = UnityEngine.Object.FindObjectsOfType(typeof(UnityReferenceHelper)) as UnityReferenceHelper[];
-				
-				for (int i=0;i<helpers.Length;i++) {
-					if (helpers[i].GetGUID () == guid) {
-						if (System.Type.Equals ( type, typeof(GameObject) )) {
-							return helpers[i].gameObject;
-						} else {
-							return helpers[i].GetComponent (type);
-						}
-					}
-				}
-				
 			}
 			
 			//Try to load from resources
@@ -95,17 +81,6 @@ namespace Pathfinding.Serialization
 					go = component.gameObject;
 				}
 				
-				var helper = go.GetComponent<UnityReferenceHelper>();
-				
-				if (helper == null) {
-					Debug.Log ("Adding UnityReferenceHelper to Unity Reference '"+obj.name+"'");
-					helper = go.AddComponent<UnityReferenceHelper>();
-				}
-				
-				//Make sure it has a unique GUID
-				helper.Reset ();
-				
-				dict.Add ("GUID",helper.GetGUID ());
 			}
 			return dict;
 		}

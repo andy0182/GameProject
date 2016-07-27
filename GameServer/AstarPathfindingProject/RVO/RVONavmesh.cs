@@ -16,7 +16,6 @@ namespace Pathfinding.RVO {
 	 * 
 	 * \astarpro 
 	 */
-	[AddComponentMenu("Pathfinding/Local Avoidance/RVO Navmesh")]
 	public class RVONavmesh : GraphModifier {
 		
 		/** Height of the walls added for each obstacle edge.
@@ -44,7 +43,7 @@ namespace Pathfinding.RVO {
 			
 			NavGraph[] graphs = AstarPath.active.graphs;
 			
-			RVOSimulator rvosim = FindObjectOfType(typeof(RVOSimulator)) as RVOSimulator;
+			RVOSimulator rvosim = FindObjectOfType<RVOSimulator>();
 			if (rvosim == null) throw new System.NullReferenceException ("No RVOSimulator could be found in the scene. Please add one to any GameObject");
 			
 			Pathfinding.RVO.Simulator sim = rvosim.GetSimulator ();

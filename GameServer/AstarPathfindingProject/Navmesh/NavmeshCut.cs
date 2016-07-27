@@ -45,9 +45,11 @@ namespace Pathfinding {
 	 * \see http://www.arongranberg.com/2013/08/navmesh-cutting/
 	*/
 	[AddComponentMenu("Pathfinding/Navmesh/Navmesh Cut")]
-	public class NavmeshCut : MonoBehaviour {
+	public class NavmeshCut : System.Runtime.Remoting.CoroutineManager
+    {
+        public Transform transform;
 
-		public enum MeshType {
+        public enum MeshType {
 			Rectangle,
 			Circle,
 			CustomMesh
@@ -70,9 +72,7 @@ namespace Pathfinding {
 		public static List<NavmeshCut> GetAllInRange(Bounds b) {
 			List<NavmeshCut> cuts = Pathfinding.Util.ListPool<NavmeshCut>.Claim ();
 			for (int i=0;i<allCuts.Count;i++) {
-				if (allCuts[i].enabled && Intersects(b, allCuts[i].GetBounds())) {
 					cuts.Add (allCuts[i]);
-				}
 			}
 			return cuts;
 		}
@@ -203,7 +203,7 @@ namespace Pathfinding {
 		 * relavant output from this method again.
 		 */
 		public bool RequiresUpdate () {
-			return wasEnabled != enabled || (wasEnabled && ((tr.position-lastPosition).sqrMagnitude > updateDistance*updateDistance || (useRotation && (Quaternion.Angle (lastRotation, tr.rotation) > updateRotationDistance))));
+			return  (wasEnabled && ((tr.position-lastPosition).sqrMagnitude > updateDistance*updateDistance || (useRotation && (Quaternion.Angle (lastRotation, tr.rotation) > updateRotationDistance))));
 		}
 
 		/**
@@ -216,7 +216,6 @@ namespace Pathfinding {
 
 		/** Internal method to notify the NavmeshCut that it has just been used to update the navmesh */
 		public void NotifyUpdated () {
-			wasEnabled = enabled;
 
 			if (wasEnabled) {
 				lastPosition = tr.position;
@@ -280,7 +279,6 @@ namespace Pathfinding {
 						s = tmp;
 
 						if (s == -1) {
-							Debug.LogError ("Invalid Mesh '"  + mesh.name + " in " + gameObject.name);
 							break;
 						}
 					} while (s != i);
