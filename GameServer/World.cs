@@ -16,7 +16,7 @@ namespace GameServer
         {
             Entitys.Add(new WorldObject() { ID = 1 });
             Entitys.Add(new WorldObject() { ID = 1 });
-            //Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
             //Entitys.Add(new WorldObject() { ID = 1 });
             //Entitys.Add(new WorldObject() { ID = 1 });
             Update();
