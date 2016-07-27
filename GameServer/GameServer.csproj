@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{418828FD-1E1D-47A6-8093-FDAC9EBC8249}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GameServer</RootNamespace>
+    <AssemblyName>GameServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNITY_4</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NetInterface">
+      <HintPath>..\..\..\..\New Unity Project\Assets\Plugins\NetInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.ClipperLib">
+      <HintPath>..\..\WindowsFormsApplication1\WindowsFormsApplication1\AstarPathfindingProject\Plugins\Clipper\Pathfinding.ClipperLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>..\..\WindowsFormsApplication1\WindowsFormsApplication1\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.JsonFx">
+      <HintPath>..\..\WindowsFormsApplication1\WindowsFormsApplication1\AstarPathfindingProject\Plugins\JsonFx\Pathfinding.JsonFx.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.Poly2Tri">
+      <HintPath>..\..\WindowsFormsApplication1\WindowsFormsApplication1\AstarPathfindingProject\Plugins\Poly2Tri\Pathfinding.Poly2Tri.dll</HintPath>
+    </Reference>
+    <Reference Include="RemotingServerClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\New Unity Project\Assets\Plugins\RemotingServerClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AStarPathFinding.cs" />
+    <Compile Include="AstarPathfindingProject\Core\AI\AIPath.cs" />
+    <Compile Include="AstarPathfindingProject\Core\AI\NavmeshController.cs" />
+    <Compile Include="AstarPathfindingProject\Core\AI\RichAI.cs" />
+    <Compile Include="AstarPathfindingProject\Core\AI\RichPath.cs" />
+    <Compile Include="AstarPathfindingProject\Core\AI\Seeker.cs" />
+    <Compile Include="AstarPathfindingProject\Core\astarclasses.cs" />
+    <Compile Include="AstarPathfindingProject\Core\AstarData.cs" />
+    <Compile Include="AstarPathfindingProject\Core\AstarMath.cs" />
+    <Compile Include="AstarPathfindingProject\Core\AstarPath.cs" />
+    <Compile Include="AstarPathfindingProject\Core\GraphUpdateScene.cs" />
+    <Compile Include="AstarPathfindingProject\Core\GraphUpdateShape.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\AnimationLink.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\AstarDebugger.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\AstarEnumFlagAttr.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\BinaryHeap.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\GraphEditorBase.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\GraphModifier.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\Int3.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\ListPool.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\NodeLink.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\NodeLink2.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\NodeLink3.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\ObjectPool.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\PathPool.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\StackPool.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\ThreadControlQueue.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Misc\WindowsStoreCompatibility.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Nodes\GraphNode.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Path.cs" />
+    <Compile Include="AstarPathfindingProject\Core\PathHandler.cs" />
+    <Compile Include="AstarPathfindingProject\Core\RVO\RVOAgent.cs" />
+    <Compile Include="AstarPathfindingProject\Core\RVO\RVOCoreObstacle.cs" />
+    <Compile Include="AstarPathfindingProject\Core\RVO\RVOCoreSimulator.cs" />
+    <Compile Include="AstarPathfindingProject\Core\RVO\RVOLine.cs" />
+    <Compile Include="AstarPathfindingProject\Core\RVO\RVOQuadtree.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Serialization\JsonConverters.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Serialization\JsonSerializer.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Serialization\SimpleJsonReplacement.cs" />
+    <Compile Include="AstarPathfindingProject\Core\Serialization\SimpleZipReplacement.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Base.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\GridGenerator.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\LayerGridGraphGenerator.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\NavMeshGenerator.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\NodeClasses\GridNode.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\NodeClasses\PointNode.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\NodeClasses\TriangleMeshNode.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\PointGenerator.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\QuadtreeGraph.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\RecastGenerator.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\BBTree.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\EuclideanEmbedding.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\NavMeshRenderer.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\ObjImporter.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\RecastBBTree.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\RecastMeshObj.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\TileHandler.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\Voxels\DebugUtility.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\Voxels\VoxelClasses.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\Voxels\VoxelContour.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\Voxels\VoxelMesh.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\Voxels\VoxelRasterization.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\Voxels\VoxelRegion.cs" />
+    <Compile Include="AstarPathfindingProject\Generators\Utilities\Voxels\VoxelUtility.cs" />
+    <Compile Include="AstarPathfindingProject\Modifiers\AdvancedSmooth.cs" />
+    <Compile Include="AstarPathfindingProject\Modifiers\AlternativePath.cs" />
+    <Compile Include="AstarPathfindingProject\Modifiers\FunnelModifier.cs" />
+    <Compile Include="AstarPathfindingProject\Modifiers\Modifiers.cs" />
+    <Compile Include="AstarPathfindingProject\Modifiers\RadiusModifier.cs" />
+    <Compile Include="AstarPathfindingProject\Modifiers\RaycastModifier.cs" />
+    <Compile Include="AstarPathfindingProject\Modifiers\SimpleSmoothModifier.cs" />
+    <Compile Include="AstarPathfindingProject\Modifiers\StartEndModifier.cs" />
+    <Compile Include="AstarPathfindingProject\Navmesh\NavmeshAdd.cs" />
+    <Compile Include="AstarPathfindingProject\Navmesh\NavmeshCut.cs" />
+    <Compile Include="AstarPathfindingProject\Navmesh\RelevantGraphSurface.cs" />
+    <Compile Include="AstarPathfindingProject\Navmesh\TileHandlerHelper.cs" />
+    <Compile Include="AstarPathfindingProject\Pathfinders\ABPath.cs" />
+    <Compile Include="AstarPathfindingProject\Pathfinders\ConstantPath.cs" />
+    <Compile Include="AstarPathfindingProject\Pathfinders\FleePath.cs" />
+    <Compile Include="AstarPathfindingProject\Pathfinders\FloodPath.cs" />
+    <Compile Include="AstarPathfindingProject\Pathfinders\FloodPathTracer.cs" />
+    <Compile Include="AstarPathfindingProject\Pathfinders\MultiTargetPath.cs" />
+    <Compile Include="AstarPathfindingProject\Pathfinders\RandomPath.cs" />
+    <Compile Include="AstarPathfindingProject\Pathfinders\XPath.cs" />
+    <Compile Include="AstarPathfindingProject\RVO\RVOController.cs" />
+    <Compile Include="AstarPathfindingProject\RVO\RVONavmesh.cs" />
+    <Compile Include="AstarPathfindingProject\RVO\RVOObstacle.cs" />
+    <Compile Include="AstarPathfindingProject\RVO\RVOSimulator.cs" />
+    <Compile Include="AstarPathfindingProject\RVO\RVOSquareObstacle.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\AstarChecksum.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\AstarMemory.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\AstarParallel.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\AstarProfiler.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\DotNetReplacements.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\GraphUpdateUtilities.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\LockFreeStack.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\PathUtilities.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\ProfileHelper.cs" />
+    <Compile Include="AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
+    <Compile Include="UtilityHelper.cs" />
+    <Compile Include="World.cs" />
+    <Compile Include="Core\AuthorAttribute.cs" />
+    <Compile Include="Core\IPathFinder.cs" />
+    <Compile Include="Core\PathFinder.cs" />
+    <Compile Include="Core\PathFinderFast.cs" />
+    <Compile Include="Core\PathFinderHelper.cs" />
+    <Compile Include="Core\Point.cs" />
+    <Compile Include="Core\PriorityQueueB.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screen.bmp" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
