@@ -226,10 +226,6 @@ namespace Pathfinding.RVO {
 		 * \throws System.InvalidOperationException When no RVOSimulator could be found.
 		 */
 		protected void FindSimulator () {
-			RVOSimulator rvosim = FindObjectOfType<RVOSimulator>();
-			if (rvosim == null) throw new System.InvalidOperationException ("No RVOSimulator could be found in the scene. Please add one to any GameObject");
-			
-			sim = rvosim.GetSimulator ();
 		}
 		
 		/** Adds an obstacle with the specified vertices.

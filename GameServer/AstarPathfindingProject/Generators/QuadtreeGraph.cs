@@ -35,7 +35,7 @@ namespace Pathfinding {
 		}
 		
 		public int CheckNode (int xs, int ys, int width) {
-			Debug.Log ("Checking Node " + xs + " " + ys + " width: " + width);
+			//Debug.Log ("Checking Node " + xs + " " + ys + " width: " + width);
 			bool val = map[xs + ys*Width];
 			for (int x = xs;x < xs+width; x++) {
 				for (int y = ys; y < ys+width; y++) {
@@ -194,10 +194,10 @@ namespace Pathfinding {
 			
 			Vector3 pos = LocalToWorldPosition (x,y,width);
 			
-			Debug.DrawLine (pos, parentPos, Color.red);
+			//Debug.DrawLine (pos, parentPos, Color.red);
 			
 			if (h.node != null) {
-				Debug.DrawRay (pos, Vector3.down, h.node.Walkable ? Color.green : Color.yellow);
+				//Debug.DrawRay (pos, Vector3.down, h.node.Walkable ? Color.green : Color.yellow);
 			} else {
 				DrawRec (h.c0, depth+1,x        , y          , pos);
 				DrawRec (h.c1, depth+1,x+width/2, y          , pos);

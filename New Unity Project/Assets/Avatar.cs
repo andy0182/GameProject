@@ -5,21 +5,26 @@ using System.Runtime.Remoting;
 public class Avatar : EntityMonoBehaviour 
 {
 	public TransportEntity mAvatar;
-	Transform target;
+	public Transform Target;
 	Vector3 Position=Vector3.zero;
 	// Use this for initialization
 	void Start () 
 	{
-		target=GetComponent<AIPath>().target;
+		Target=GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
+		GameObject.FindObjectOfType<Pathfinding.TargetMover>().target=Target.transform;
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	public override void Update () 
 	{
-		if((target.position-Position).sqrMagnitude>5.5f)
+		base.Update();
+		if(Input.GetMouseButtonDown(0))
 		{
-			Position=target.position;
 			mAvatar.SetTarget(Position.x,Position.y,Position.z);
+		}
+		if(Input.GetKeyDown(KeyCode.A))
+		{
+			mAvatar.Skill(0);
 		}
 	}
 }

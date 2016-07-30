@@ -577,7 +577,7 @@ namespace Pathfinding.RVO {
 				}
 				
 				if (count >= vertices.Length) {
-					Debug.DrawLine (c.prev.position, c.position,Color.red);
+					//Debug.DrawLine (c.prev.position, c.position,Color.red);
 					throw new System.ArgumentException ("Obstacle has more vertices than supplied for updating (" + vertices.Length+ " supplied)");
 				}
 				c.position = matrix.MultiplyPoint3x4 (vertices[count]);
@@ -880,11 +880,11 @@ namespace Pathfinding.RVO {
 								agents[i].BufferSwitch ();
 							}*/
 						} else {
-							Debug.LogError ("Invalid Task Number: " + task);
+							//Debug.LogError ("Invalid Task Number: " + task);
 							throw new System.Exception ("Invalid Task Number: " + task);
 						}
 					} catch (System.Exception e) {
-						Debug.LogError (e);
+						//Debug.LogError (e);
 					}
 					waitFlag.Set ();
 					runFlag.WaitOne ();

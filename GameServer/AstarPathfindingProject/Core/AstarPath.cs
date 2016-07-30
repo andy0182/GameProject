@@ -622,7 +622,7 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 
 			//Queue a cleanup operation to zero all path IDs
 			//StartPath (new CleanupPath65K ());
-			Debug.Log ("65K cleanup");
+			//Debug.Log ("65K cleanup");
 
 			//ushort toBeReturned = nextFreePathID;
 
@@ -762,24 +762,24 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 	/** Logs a string while taking into account #logPathResults */
 	private static void AstarLog (string s) {
 		if (System.Object.ReferenceEquals(active,null)) {
-			Debug.Log ("No AstarPath object was found : "+s);
+			//Debug.Log ("No AstarPath object was found : "+s);
 			return;
 		}
 
 		if (active.logPathResults != PathLog.None && active.logPathResults != PathLog.OnlyErrors) {
-			Debug.Log (s);
+			//Debug.Log (s);
 		}
 	}
 
 	/** Logs an error string while taking into account #logPathResults */
 	private static void AstarLogError (string s) {
 		if (active == null) {
-			Debug.Log ("No AstarPath object was found : "+s);
+			//Debug.Log ("No AstarPath object was found : "+s);
 			return;
 		}
 
 		if (active.logPathResults != PathLog.None) {
-			Debug.LogError (s);
+			//Debug.LogError (s);
 		}
 	}
 #line default
@@ -849,8 +849,8 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 				// Queue termination exceptions should be ignored, they are supposed to kill the thread
 				if (!(e is ThreadControlQueue.QueueTerminationException))
                 {
-					Debug.LogException (e);
-					Debug.LogError ("Unhandled exception during pathfinding. Terminating.");
+					//Debug.LogException (e);
+					//Debug.LogError ("Unhandled exception during pathfinding. Terminating.");
 					pathQueue.TerminateReceivers();
 
 					//This will throw an exception supposed to kill the thread
@@ -985,9 +985,6 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 				}
 
 				if (!status) {
-					if ( force ) {
-						Debug.LogError ("Misbehaving WorkItem. 'force'=true but the work item did not complete.\nIf force=true is passed to a WorkItem it should always return true.");
-					}
 					// Still work items to process
 					processingWorkItems = false;
 					return 1;
@@ -1258,13 +1255,13 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 						try {
 							s.graph.UpdateAreaInit (s.obj);
 						} catch (System.Exception e) {
-							Debug.LogError ("Error while initializing GraphUpdates\n" + e);
+							//Debug.LogError ("Error while initializing GraphUpdates\n" + e);
 						}
 					}
 					try {
 						s.graph.UpdateArea (s.obj);
 					} catch (System.Exception e) {
-						Debug.LogError ("Error while updating graphs\n"+e);
+						//Debug.LogError ("Error while updating graphs\n"+e);
 					}
 				}
 #if !UNITY_WEBGL
@@ -1296,7 +1293,7 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 	void ProcessGraphUpdatesAsync (System.Object _astar) {
 		AstarPath astar = _astar as AstarPath;
 		if (System.Object.ReferenceEquals (astar, null)) {
-			Debug.LogError ("ProcessGraphUpdatesAsync started with invalid parameter _astar (was no AstarPath object)");
+			//Debug.LogError ("ProcessGraphUpdatesAsync started with invalid parameter _astar (was no AstarPath object)");
 			return;
 		}
 
@@ -1322,7 +1319,7 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 						throw new System.NotSupportedException ("" + aguo.order);
 					}
 				} catch (System.Exception e) {
-					Debug.LogError ("Exception while updating graphs:\n"+e);
+					//Debug.LogError ("Exception while updating graphs:\n"+e);
 				}
 			}
 
@@ -1388,7 +1385,7 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 			int memory = SystemInfo.systemMemorySize;
 
 			if ( memory <= 0 ) {
-				Debug.LogError ("Machine reporting that is has <= 0 bytes of RAM. This is definitely not true, assuming 1 GiB");
+				//Debug.LogError ("Machine reporting that is has <= 0 bytes of RAM. This is definitely not true, assuming 1 GiB");
 				memory = 1024;
 			}
 
@@ -1528,7 +1525,7 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 	void OnDestroy () {
 
 		if (logPathResults == PathLog.Heavy)
-			Debug.Log ("+++ AstarPath Component Destroyed - Cleaning Up Pathfinding Data +++");
+			//Debug.Log ("+++ AstarPath Component Destroyed - Cleaning Up Pathfinding Data +++");
 
 		if ( active != this ) return;
 
@@ -1547,7 +1544,7 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 		pathQueue.TerminateReceivers();
 
 		if (logPathResults == PathLog.Heavy)
-			Debug.Log ("Processing Eventual Work Items");
+			//Debug.Log ("Processing Eventual Work Items");
 
 		//Resume graph update thread, will cause it to terminate
 		graphUpdateAsyncEvent.Set();
@@ -1562,15 +1559,15 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 				}
 #else
 				if (!threads[i].Join (50)) {
-					Debug.LogError ("Could not terminate pathfinding thread["+i+"] in 50ms, trying Thread.Abort");
+					//Debug.LogError ("Could not terminate pathfinding thread["+i+"] in 50ms, trying Thread.Abort");
 					threads[i].Abort ();
 				}
 #endif
 			}
 		}
 
-		if (logPathResults == PathLog.Heavy)
-			Debug.Log ("Returning Paths");
+		//if (logPathResults == PathLog.Heavy)
+			//Debug.Log ("Returning Paths");
 
 
 		//Return all paths
@@ -1578,15 +1575,15 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 		//Just in case someone happened to request a path in ReturnPath() (even though they should get canceled)
 		pathReturnStack.PopAll ();
 
-		if (logPathResults == PathLog.Heavy)
-			Debug.Log ("Destroying Graphs");
+		//if (logPathResults == PathLog.Heavy)
+			//Debug.Log ("Destroying Graphs");
 
 
 		//Clean graphs up
 		astarData.OnDestroy ();
 
-		if (logPathResults == PathLog.Heavy)
-			Debug.Log ("Cleaning up variables");
+		//if (logPathResults == PathLog.Heavy)
+			//Debug.Log ("Cleaning up variables");
 
 		//Clear variables up, static variables are good to clean up, otherwise the next scene might get weird data
 		floodStack = null;
@@ -1627,12 +1624,12 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 	public void FloodFill (GraphNode seed, uint area) {
 
 		if (area > GraphNode.MaxAreaIndex) {
-			Debug.LogError ("Too high area index - The maximum area index is " + GraphNode.MaxAreaIndex);
+			//Debug.LogError ("Too high area index - The maximum area index is " + GraphNode.MaxAreaIndex);
 			return;
 		}
 
 		if (area < 0) {
-			Debug.LogError ("Too low area index - The minimum area index is 0");
+			//Debug.LogError ("Too low area index - The minimum area index is 0");
 			return;
 		}
 
@@ -1761,9 +1758,9 @@ public class AstarPath : System.Runtime.Remoting.CoroutineManager
 
 		lastUniqueAreaIndex = area;
 
-		if (warnAboutAreas) {
-			Debug.LogError ("Too many areas - The maximum number of areas is " + GraphNode.MaxAreaIndex +". Try raising the A* Inspector -> Settings -> Min Area Size value. Enable the optimization ASTAR_MORE_AREAS under the Optimizations tab.");
-		}
+		//if (warnAboutAreas) {
+		//	Debug.LogError ("Too many areas - The maximum number of areas is " + GraphNode.MaxAreaIndex +". Try raising the A* Inspector -> Settings -> Min Area Size value. Enable the optimization ASTAR_MORE_AREAS under the Optimizations tab.");
+		//}
 
 		if (smallAreasDetected > 0) {
 			AstarLog (smallAreasDetected +" small areas were detected (fewer than "+minAreaSize+" nodes)," +
@@ -1962,7 +1959,7 @@ Debug.Log ("Scanning... " + progress.description + " - " + (progress.progress*10
 		try {
 			FlushWorkItems(false, true);
 		} catch (System.Exception e) {
-			Debug.LogException (e);
+			//Debug.LogException (e);
 		}
 
 		isScanning = false;
@@ -2043,7 +2040,7 @@ Debug.Log ("Scanning... " + progress.description + " - " + (progress.progress*10
 		waitForPathDepth++;
 
 		if (waitForPathDepth == 5) {
-			Debug.LogError ("You are calling the WaitForPath function recursively (maybe from a path callback). Please don't do this.");
+			//Debug.LogError ("You are calling the WaitForPath function recursively (maybe from a path callback). Please don't do this.");
 		}
 
 		if (p.GetState() < PathState.ReturnQueue) {
@@ -2169,7 +2166,7 @@ AstarPath.RegisterSafeUpdate (delegate () {
 	public static void StartPath (Path p, bool pushToFront = false) {
 
 		if (System.Object.ReferenceEquals (active, null)) {
-			Debug.LogError ("There is no AstarPath object in the scene");
+			//Debug.LogError ("There is no AstarPath object in the scene");
 			return;
 		}
 
@@ -2185,10 +2182,10 @@ AstarPath.RegisterSafeUpdate (delegate () {
 		}
 
 		if (active.graphs == null || active.graphs.Length == 0) {
-			Debug.LogError ("There are no graphs in the scene");
+			//Debug.LogError ("There are no graphs in the scene");
 			p.Error ();
 			p.LogError ("There are no graphs in the scene");
-			Debug.LogError (p.errorLog);
+			//Debug.LogError (p.errorLog);
 			return;
 		}
 
@@ -2240,7 +2237,7 @@ AstarPath.RegisterSafeUpdate (delegate () {
 	 */
 	public void OnApplicationQuit () {
 		if (logPathResults == PathLog.Heavy) {
-			Debug.Log ("+++ Application Quitting - Cleaning Up +++");
+			//Debug.Log ("+++ Application Quitting - Cleaning Up +++");
 		}
 
 		OnDestroy ();
@@ -2329,7 +2326,7 @@ AstarPath.RegisterSafeUpdate (delegate () {
 		try {
 			threadInfo = (PathThreadInfo)_threadInfo;
 		} catch (System.Exception e) {
-			Debug.LogError ("Arguments to pathfinding threads must be of type ThreadStartInfo\n"+e);
+			//Debug.LogError ("Arguments to pathfinding threads must be of type ThreadStartInfo\n"+e);
 			throw new System.ArgumentException ("Argument must be of type ThreadStartInfo",e);
 		}
 
@@ -2469,17 +2466,17 @@ AstarPath.RegisterSafeUpdate (delegate () {
 #endif
 			{
 				if (astar.logPathResults == PathLog.Heavy)
-					Debug.LogWarning ("Shutting down pathfinding thread #"+threadInfo.threadIndex);
+					//Debug.LogWarning ("Shutting down pathfinding thread #"+threadInfo.threadIndex);
 				return;
 			}
-			Debug.LogException (e);
-			Debug.LogError ("Unhandled exception during pathfinding. Terminating.");
+			//Debug.LogException (e);
+			//Debug.LogError ("Unhandled exception during pathfinding. Terminating.");
 			//Unhandled exception, kill pathfinding
 			astar.pathQueue.TerminateReceivers();
 		}
 #endif
 
-		Debug.LogError ("Error : This part should never be reached.");
+		//Debug.LogError ("Error : This part should never be reached.");
 		astar.pathQueue.ReceiverTerminated ();
 	}
 
@@ -2495,7 +2492,7 @@ AstarPath.RegisterSafeUpdate (delegate () {
 		try {
 			threadInfo = (PathThreadInfo)_threadInfo;
 		} catch (System.Exception e) {
-			Debug.LogError ("Arguments to pathfinding threads must be of type ThreadStartInfo\n"+e);
+			//Debug.LogError ("Arguments to pathfinding threads must be of type ThreadStartInfo\n"+e);
 			throw new System.ArgumentException ("Argument must be of type ThreadStartInfo",e);
 		}
 

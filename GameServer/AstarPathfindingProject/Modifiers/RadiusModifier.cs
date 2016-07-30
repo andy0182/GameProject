@@ -142,12 +142,12 @@ public class RadiusModifier : MonoModifier {
 		Vector3 last = new Vector3((float)Math.Cos(start),0,(float)Math.Sin(start))*rad + p1;
 		for (float t=start; t < end;t += 2.0f*(float)Math.PI/200f) {
 			Vector3 p = new Vector3((float)Math.Cos(t),0,(float)Math.Sin(t))*rad + p1;
-			Debug.DrawLine (last,p,col);
+			//Debug.DrawLine (last,p,col);
 			last = p;
 		}
 		if (end == Math.PI*2.0f) {
 			Vector3 p = new Vector3((float)Math.Cos(start),0,(float)Math.Sin(start))*rad + p1;
-			Debug.DrawLine (last,p,col);
+			//Debug.DrawLine (last,p,col);
 		}
 	}
 	
@@ -191,7 +191,7 @@ public class RadiusModifier : MonoModifier {
 		for (int i=0;i<vs.Count-1;i++) {
 			count ++;
 			if (count > 2*vs.Count) {
-				Debug.LogWarning ("Could not resolve radiuses, the path is too complex. Try reducing the base radius");
+				//Debug.LogWarning ("Could not resolve radiuses, the path is too complex. Try reducing the base radius");
 				break;
 			}
 			

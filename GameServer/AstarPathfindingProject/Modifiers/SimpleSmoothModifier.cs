@@ -93,7 +93,7 @@ namespace Pathfinding {
 			
 			//This should never trigger unless some other modifier has messed stuff up
 			if (p.vectorPath == null) {
-				Debug.LogWarning ("Can't process NULL path (has another modifier logged an error?)");
+				//Debug.LogWarning ("Can't process NULL path (has another modifier logged an error?)");
 				return;
 			}
 			
@@ -121,7 +121,7 @@ namespace Pathfinding {
 		public List<Vector3> CurvedNonuniform (List<Vector3> path) {
 			
 			if (maxSegmentLength <= 0) {
-				Debug.LogWarning ("Max Segment Length is <= 0 which would cause DivByZero-exception or other nasty errors (avoid this)");
+				//Debug.LogWarning ("Max Segment Length is <= 0 which would cause DivByZero-exception or other nasty errors (avoid this)");
 				return path;
 			}
 			
@@ -209,7 +209,7 @@ namespace Pathfinding {
 			}
 			
 			if (iterations > 12) {
-				Debug.LogWarning ("A very high iteration count was passed, won't let this one through");
+				//Debug.LogWarning ("A very high iteration count was passed, won't let this one through");
 				return path;
 			}
 			

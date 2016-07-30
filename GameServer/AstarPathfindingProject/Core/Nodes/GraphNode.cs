@@ -114,9 +114,6 @@ namespace Pathfinding {
 			}
 			set {
 				if (value > 0xFFFFFF)
-					Debug.LogWarning ("Very high penalty applied. Are you sure negative values haven't underflowed?\n" +
-						"Penalty values this high could with long paths cause overflows and in some cases infinity loops because of that.\n" +
-						"Penalty value applied: "+value);
 				penalty = value;
 			}
 #else

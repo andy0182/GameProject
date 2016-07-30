@@ -232,7 +232,7 @@ namespace Pathfinding {
 				same &= n1.node == connectedNode1 && n1.node != null;
 				connectedNode1 = n1.node as MeshNode;
 				clamped1 = n1.clampedPosition;
-				if ( connectedNode1 != null ) Debug.DrawRay ( (Vector3)connectedNode1.position, Vector3.up*5,Color.red);
+				//if ( connectedNode1 != null ) Debug.DrawRay ( (Vector3)connectedNode1.position, Vector3.up*5,Color.red);
 			}
 			
 			if (true) {
@@ -240,7 +240,7 @@ namespace Pathfinding {
 				same &= n2.node == connectedNode2 && n2.node != null;
 				connectedNode2 = n2.node as MeshNode;
 				clamped2 = n2.clampedPosition;
-				if ( connectedNode2 != null ) Debug.DrawRay ( (Vector3)connectedNode2.position, Vector3.up*5,Color.cyan);
+				//if ( connectedNode2 != null ) Debug.DrawRay ( (Vector3)connectedNode2.position, Vector3.up*5,Color.cyan);
 			}
 			
 			if (connectedNode2 == null || connectedNode1 == null) return;
@@ -285,7 +285,7 @@ namespace Pathfinding {
 						t1 = System.Math.Max ( t1, AstarMath.NearestPointFactor ( va1, va2, vb2 ) );
 						
 						if ( t2 < t1 ) {
-							Debug.LogError ("Wait wut!? " + t1 + " " + t2 + " " + va1 + " " + va2 + " " + vb1 + " " + vb2+"\nTODO, fix this error" );
+							//Debug.LogError ("Wait wut!? " + t1 + " " + t2 + " " + va1 + " " + va2 + " " + vb1 + " " + vb2+"\nTODO, fix this error" );
 						} else {
 						
 							Vector3 pa = (Vector3)(va2-va1)*t1 + (Vector3)va1;

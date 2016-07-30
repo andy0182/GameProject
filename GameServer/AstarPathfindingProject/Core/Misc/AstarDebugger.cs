@@ -211,14 +211,14 @@ public class AstarDebugger : System.Runtime.Remoting.CoroutineManager
 	}
 	
 	public void DrawGraphLine (int index, Matrix4x4 m, float x1, float x2, float y1, float y2, Color col) {
-		Debug.DrawLine (cam.ScreenToWorldPoint (m.MultiplyPoint3x4 (new Vector3 (x1,y1))), cam.ScreenToWorldPoint (m.MultiplyPoint3x4 (new Vector3 (x2,y2))), col);
+		//Debug.DrawLine (cam.ScreenToWorldPoint (m.MultiplyPoint3x4 (new Vector3 (x1,y1))), cam.ScreenToWorldPoint (m.MultiplyPoint3x4 (new Vector3 (x2,y2))), col);
 	}
 	
 	public void Cross (Vector3 p) {
 		
 		p = cam.cameraToWorldMatrix.MultiplyPoint (p);
-		Debug.DrawLine (p-Vector3.up*0.2f, p+Vector3.up*0.2f,Color.red);
-		Debug.DrawLine (p-Vector3.right*0.2f, p+Vector3.right*0.2f,Color.red);
+		//Debug.DrawLine (p-Vector3.up*0.2f, p+Vector3.up*0.2f,Color.red);
+		//Debug.DrawLine (p-Vector3.right*0.2f, p+Vector3.right*0.2f,Color.red);
 	}
 	
 	

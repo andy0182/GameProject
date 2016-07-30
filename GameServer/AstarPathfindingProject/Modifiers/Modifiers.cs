@@ -138,7 +138,7 @@ namespace Pathfinding {
 
 			//"Input" can not be converted to "output", log error
 			if (!CanConvert (input,output)) {
-				Debug.LogError ("Can't convert "+input+" to "+output);
+				//Debug.LogError ("Can't convert "+input+" to "+output);
 				return ModifierData.None;
 			}
 
@@ -158,7 +158,7 @@ namespace Pathfinding {
 				return ModifierData.VectorPath | (AnyBits (input, ModifierData.StrictNodePath) ? ModifierData.StrictVectorPath : ModifierData.None);
 			}
 
-			Debug.LogError ("This part should not be reached - Error in ModifierConverted\nInput: "+input+" ("+(int)input+")\nOutput: "+output+" ("+(int)output+")");
+			//Debug.LogError ("This part should not be reached - Error in ModifierConverted\nInput: "+input+" ("+(int)input+")\nOutput: "+output+" ("+(int)output+")");
 			return ModifierData.None;
 		}
 

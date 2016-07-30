@@ -4,6 +4,8 @@
     {
         public abstract void SetTarget(float x, float y, float z);
         public abstract void SetPosition(float x, float y, float z);
+        public abstract void OnDestroy();
+        public abstract void Skill(int id);
     }
     public abstract class Player : RemotingObject
     {

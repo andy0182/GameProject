@@ -15,7 +15,7 @@ namespace Pathfinding
 		readonly FloodPath path;
 
 		public FloodPathConstraint (FloodPath path) {
-			if (path == null) { Debug.LogWarning ("FloodPathConstraint should not be used with a NULL path"); }
+			//if (path == null) { Debug.LogWarning ("FloodPathConstraint should not be used with a NULL path"); }
 			this.path = path;
 		}
 
@@ -110,7 +110,7 @@ namespace Pathfinding
 
 				count++;
 				if (count > 1024) {
-					Debug.LogWarning ("Inifinity loop? >1024 node path. Remove this message if you really have that long paths (FloodPathTracer.cs, Trace function)");
+					//Debug.LogWarning ("Inifinity loop? >1024 node path. Remove this message if you really have that long paths (FloodPathTracer.cs, Trace function)");
 					break;
 				}
 			}

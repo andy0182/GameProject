@@ -37,22 +37,7 @@ namespace Pathfinding.RVO {
 		}
 		
 		public override void OnLatePostScan () {
-			if (!Application.isPlaying) return;
-			
 			RemoveObstacles ();
-			
-			NavGraph[] graphs = AstarPath.active.graphs;
-			
-			RVOSimulator rvosim = FindObjectOfType<RVOSimulator>();
-			if (rvosim == null) throw new System.NullReferenceException ("No RVOSimulator could be found in the scene. Please add one to any GameObject");
-			
-			Pathfinding.RVO.Simulator sim = rvosim.GetSimulator ();
-			
-			for (int i=0;i<graphs.Length;i++) {
-				AddGraphObstacles (sim, graphs[i]);
-			}
-			
-			sim.UpdateObstacles ();
 		}
 		
 		/** Removes obstacles which were added with AddGraphObstacles */
@@ -70,7 +55,7 @@ namespace Pathfinding.RVO {
 		/** Adds obstacles for a graph */
 		public void AddGraphObstacles (Pathfinding.RVO.Simulator sim, NavGraph graph) {
 			if (obstacles.Count > 0 && lastSim != null && lastSim != sim) {
-				Debug.LogError ("Simulator has changed but some old obstacles are still added for the previous simulator. Deleting previous obstacles.");
+				//Debug.LogError ("Simulator has changed but some old obstacles are still added for the previous simulator. Deleting previous obstacles.");
 				RemoveObstacles ();
 			}
 			

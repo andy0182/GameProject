@@ -76,11 +76,6 @@ namespace Pathfinding {
 		}
 		
 		public static void FindAllGraphSurfaces () {
-			var srf = FindObjectsOfType<RelevantGraphSurface>();
-			for (int i=0;i<srf.Length;i++) {
-				srf[i].OnDisable ();
-				srf[i].OnEnable ();
-			}
 		}
 		
 		public void OnDrawGizmos () {

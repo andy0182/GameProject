@@ -71,7 +71,7 @@ namespace Pathfinding {
 		public new void UpdateArea (GraphUpdateObject o) {
 
 			if (nodes == null || nodes.Length != width*depth*layerCount) {
-				Debug.LogWarning ("The Grid Graph is not scanned, cannot update area ");
+				//Debug.LogWarning ("The Grid Graph is not scanned, cannot update area ");
 				//Not scanned
 				return;
 			}
@@ -114,7 +114,7 @@ namespace Pathfinding {
 			int erosion = o.updateErosion ? erodeIterations : 0;
 
 			if (o.trackChangedNodes	&& willChangeNodeInstances) {
-				Debug.LogError ("Cannot track changed nodes when creating or deleting nodes.\nWill not update LayerGridGraph");
+				//Debug.LogError ("Cannot track changed nodes when creating or deleting nodes.\nWill not update LayerGridGraph");
 				return;
 			}
 
@@ -340,7 +340,7 @@ namespace Pathfinding {
 			GenerateMatrix ();
 
 			if (width > 1024 || depth > 1024) {
-				Debug.LogError ("One of the grid's sides is longer than 1024 nodes");
+				//Debug.LogError ("One of the grid's sides is longer than 1024 nodes");
 				return;
 			}
 
@@ -444,7 +444,7 @@ namespace Pathfinding {
 			}
 
 			if (layerCount > LevelGridNode.MaxLayerCount) {
-				Debug.LogError ("Too many layers, a maximum of LevelGridNode.MaxLayerCount are allowed (found "+layerCount+")");
+				//Debug.LogError ("Too many layers, a maximum of LevelGridNode.MaxLayerCount are allowed (found "+layerCount+")");
 				return;
 			}
 
@@ -635,7 +635,7 @@ namespace Pathfinding {
 
 					if (layerIndex >= layerCount) {
 						if (layerIndex+1 > LevelGridNode.MaxLayerCount) {
-							Debug.LogError ("Too many layers, a maximum of LevelGridNode.MaxLayerCount are allowed (required "+(layerIndex+1)+")");
+							//Debug.LogError ("Too many layers, a maximum of LevelGridNode.MaxLayerCount are allowed (required "+(layerIndex+1)+")");
 							return addedNodes;
 						}
 
@@ -708,7 +708,7 @@ namespace Pathfinding {
 			int newLayerCount = layerCount + count;
 
 			if (newLayerCount > LevelGridNode.MaxLayerCount) {
-				Debug.LogError ("Too many layers, a maximum of LevelGridNode.MaxLayerCount are allowed (required "+newLayerCount+")");
+				//Debug.LogError ("Too many layers, a maximum of LevelGridNode.MaxLayerCount are allowed (required "+newLayerCount+")");
 				return;
 			}
 
@@ -740,7 +740,7 @@ namespace Pathfinding {
 			zmax = Mathf.Clamp (zmax, 0, Depth);
 
 			if (erosionUseTags) {
-				Debug.LogError ("Erosion Uses Tags is not supported for LayerGridGraphs yet");
+				//Debug.LogError ("Erosion Uses Tags is not supported for LayerGridGraphs yet");
 			}
 
 			for (int it = 0; it < erodeIterations; it++) {
@@ -833,7 +833,7 @@ namespace Pathfinding {
 						float dist = top-bottom;
 
 						if (dist >= characterHeight && Mathf.Abs (other.position.y-lgn.position.y)*Int3.PrecisionFactor <= maxClimb) {
-							//Debug.DrawLine (lgn.position,other.position,new Color (0,1,0,0.5F));
+							///Debug.DrawLine (lgn.position,other.position,new Color (0,1,0,0.5F));
 							conn = i;
 						}
 					}

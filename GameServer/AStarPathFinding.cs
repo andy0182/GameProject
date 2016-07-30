@@ -12,6 +12,7 @@ namespace Pathfinding
             script.Awake();
             var bytes = Pathfinding.Serialization.AstarSerializer.LoadFromFile(@"C:\Users\Andy\Documents\Visual Studio 2015\Projects\GameServer\New Unity Project\graph.bytes");
             DeserializeGraphs(bytes);
+            Update();
         }
         void DeserializeGraphs(byte[] bytes)
         {
@@ -29,5 +30,21 @@ namespace Pathfinding
             // Make sure the above work item is run directly
             AstarPath.active.FlushWorkItems();
         }
+        public void OnUpdate()
+        {
+            script.Update();
+        }
+        async void Update()
+        {
+            await Task.Run(() =>
+            {
+                while (true)
+                {
+                    System.Threading.Thread.Sleep(100);
+                    OnUpdate();
+                }
+            });
+        }
     }
+
 }

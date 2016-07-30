@@ -376,7 +376,7 @@ AstarPath.active.Scan();
 							try {
 								data = source.GetPixels32 ();
 							} catch (UnityException e) {
-								Debug.LogWarning (e.ToString ());
+								//Debug.LogWarning (e.ToString ());
 								data = null;
 							}
 							break;
@@ -886,14 +886,14 @@ AstarPath.active.Scan();
 			GenerateMatrix ();
 
 			if (width > 1024 || depth > 1024) {
-				Debug.LogError ("One of the grid's sides is longer than 1024 nodes");
+				//Debug.LogError ("One of the grid's sides is longer than 1024 nodes");
 				return;
 			}
 
 #if !ASTAR_JPS
-			if (this.useJumpPointSearch) {
-				Debug.LogError ("Trying to use Jump Point Search, but support for it is not enabled. Please enable it in the inspector (Grid Graph settings).");
-			}
+			//if (this.useJumpPointSearch) {
+				//Debug.LogError ("Trying to use Jump Point Search, but support for it is not enabled. Please enable it in the inspector (Grid Graph settings).");
+			//}
 #endif
 
 			SetUpOffsetsAndCosts ();
@@ -1078,11 +1078,11 @@ AstarPath.active.Scan();
 				}
 			} else {
 				if (erodeIterations+erosionFirstTag > 31) {
-					Debug.LogError ("Too few tags available for "+erodeIterations+" erode iterations and starting with tag " + erosionFirstTag + " (erodeIterations+erosionFirstTag > 31)");
+					//Debug.LogError ("Too few tags available for "+erodeIterations+" erode iterations and starting with tag " + erosionFirstTag + " (erodeIterations+erosionFirstTag > 31)");
 					return;
 				}
 				if (erosionFirstTag <= 0) {
-					Debug.LogError ("First erosion tag must be greater or equal to 1");
+					//Debug.LogError ("First erosion tag must be greater or equal to 1");
 					return;
 				}
 
@@ -1560,7 +1560,7 @@ AstarPath.active.Scan();
 		public void UpdateArea (GraphUpdateObject o) {
 
 			if (nodes == null || nodes.Length != width*depth) {
-				Debug.LogWarning ("The Grid Graph is not scanned, cannot update area ");
+				//Debug.LogWarning ("The Grid Graph is not scanned, cannot update area ");
 				//Not scanned
 				return;
 			}
@@ -2256,7 +2256,7 @@ AstarPath.active.Scan();
 			if (nodes == null || nodes.Length == 0) return;
 
 			if (width*depth != nodes.Length) {
-				Debug.LogError ("Node data did not match with bounds data. Probably a change to the bounds/width/depth data was made after scanning the graph just prior to saving it. Nodes will be discarded");
+				//Debug.LogError ("Node data did not match with bounds data. Probably a change to the bounds/width/depth data was made after scanning the graph just prior to saving it. Nodes will be discarded");
 				nodes = new GridNode[0];
 				return;
 			}
@@ -2269,7 +2269,7 @@ AstarPath.active.Scan();
 					var node = nodes[z*width+x];
 
 					if (node == null) {
-						Debug.LogError ("Deserialization Error : Couldn't cast the node to the appropriate type - GridGenerator");
+						//Debug.LogError ("Deserialization Error : Couldn't cast the node to the appropriate type - GridGenerator");
 						return;
 					}
 

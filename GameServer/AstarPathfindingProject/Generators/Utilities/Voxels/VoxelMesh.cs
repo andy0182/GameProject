@@ -190,7 +190,7 @@ namespace Pathfinding.Voxels {
 			
 			if (maxVertices >= 65534)
 			{
-				Debug.LogWarning ("To many vertices for unity to render - Unity might screw up rendering, but hopefully the navmesh will work ok");
+				//Debug.LogWarning ("To many vertices for unity to render - Unity might screw up rendering, but hopefully the navmesh will work ok");
 				//mesh = new VoxelMesh ();
 				//yield break;
 				//return;
@@ -333,8 +333,8 @@ namespace Pathfinding.Voxels {
 				
 				if (mini == -1)
 				{
-					Debug.LogWarning ("Degenerate triangles might have been generated.\n" +
-					                "Usually this is not a problem, but if you have a static level, try to modify the graph settings slightly to avoid this edge case.");
+					//Debug.LogWarning ("Degenerate triangles might have been generated.\n" +
+					//                "Usually this is not a problem, but if you have a static level, try to modify the graph settings slightly to avoid this edge case.");
 
 					// Can't run the debug stuff because we are likely running from a separate thread
 					//for (int j=0;j<on;j++) {

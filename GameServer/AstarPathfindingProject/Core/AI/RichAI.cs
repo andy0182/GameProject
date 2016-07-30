@@ -485,7 +485,7 @@ namespace Pathfinding {
 			
 			AnimationLink al = rs.nodeLink as AnimationLink;
 			if (al == null) {
-				Debug.LogError ("Unhandled RichSpecial");
+				//Debug.LogError ("Unhandled RichSpecial");
 				yield break;
 			}
 			

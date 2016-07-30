@@ -10,15 +10,50 @@ using UtilityHelper;
 
 namespace GameServer
 {
-    class World : TransportInterface
+    public class World : TransportInterface
     {
         public World()
         {
             Entitys.Add(new WorldObject() { ID = 1 });
             Entitys.Add(new WorldObject() { ID = 1 });
             Entitys.Add(new WorldObject() { ID = 1 });
-            //Entitys.Add(new WorldObject() { ID = 1 });
-            //Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
+            Entitys.Add(new WorldObject() { ID = 1 });
             Update();
         }
         public List<WorldEntity> Entitys = new List<WorldEntity>();
@@ -27,24 +62,26 @@ namespace GameServer
         {
             lock (Entitys)
             {
-                var Player=ServerPlayer.GetServerPlayer(mPlayer);
+                var Player = ServerPlayer.GetServerPlayer(mPlayer);
+                Player.Parasitifer = this;
                 Entitys.ForEach(a => a.OnAddPlayer(Player));
-                var mavatar=Player.CreateAvater();
+                var mavatar = Player.CreateAvater();
                 List<ServerPlayer> entitys = new List<ServerPlayer>();
                 ServerPlayer.Players.ForEach((a, b) => entitys.Add(b));
                 entitys.RemoveAll(a => a == Player);
                 ///把avatar加入到其他客户端
-                entitys.ForEach(a => mavatar.AddAvatar(a.Create(100)));
+                entitys.ForEach(a => mavatar.AddAvatar(a.Create(0)));
                 ///其他客户端加入到avatar
-                entitys.ForEach(a => a.mAvatar.AddAvatar(Player.Create(101)));
+                entitys.ForEach(a => a.mAvatar.AddAvatar(Player.Create(0)));
             }
         }
 
-        public void RemovePlayer(Player mPlayer)
+        public void RemovePlayer(ServerPlayer mPlayer)
         {
-            lock(Entitys)
+            lock (Entitys)
             {
                 Entitys.ForEach(a => a.OnRemovePlayer(mPlayer));
+                mPlayer.OnExit();
             }
         }
         async void Update()
@@ -53,11 +90,11 @@ namespace GameServer
         }
         void OnUpdate()
         {
-            lock(Entitys)
+            lock (Entitys)
             {
                 DateTime TimerStart = DateTime.Now;
                 Entitys.ForEach(a => a.OnUpdate());
-                Thread.Sleep(100);
+                Thread.Sleep(25);
                 Time.deltaTime = (float)((DateTime.Now - TimerStart).TotalMilliseconds * 0.001f);
             }
         }
@@ -85,14 +122,28 @@ namespace GameServer
         List<System.Action> Actions = new List<System.Action>();
         public void setPosition(Vector3 position)
         {
-            lock(Actions)
+            lock (Actions)
             {
                 Actions.Add(() => entity.SetPosition(position.x, position.y, position.z));
             }
         }
+        public void Skill(int ID)
+        {
+            lock (Actions)
+            {
+                Actions.Add(() => entity.Skill(ID));
+            }
+        }
+        public void OnExit()
+        {
+            lock (Actions)
+            {
+                Actions.Add(() => entity.OnDestroy());
+            }
+        }
         public void SetTarget(Vector3 Target)
         {
-            lock(Actions)
+            lock (Actions)
             {
                 Actions.Add(() => entity.SetTarget(Target.x, Target.y, Target.z));
             }
@@ -111,38 +162,54 @@ namespace GameServer
     public class ServerPlayer
     {
         public static DictionaryEx<int, ServerPlayer> Players = new DictionaryEx<int, ServerPlayer>();
-
+        public World Parasitifer;
         public static ServerPlayer GetServerPlayer(Player player)
         {
-            ServerPlayer tmp= Players[player.GetHashCode()];
+            ServerPlayer tmp = Players[player.GetHashCode()];
             tmp.mPlayer = player;
             return tmp;
         }
         Player mPlayer;
         List<ServerEntity> mEntitys = new List<ServerEntity>();
         List<ServerEntity> Adds = new List<ServerEntity>();
-        public Avatar mAvatar=new Avatar();
+        public Avatar mAvatar = new Avatar();
         public ServerPlayer()
         {
             Update();
         }
+        bool Abort = false;
+        public void OnExit()
+        {
+            Abort = true;
+            Players.Remove(mPlayer.GetHashCode());
+            Players.ForEach((a, b) => b.mAvatar.RemoveAvatar(this));
+            mAvatar.OnDestroy();
+        }
         async void Update()
         {
-            await Task.Run(() => { while (true) OnUpdate(); });
+            await Task.Run(() => { while (!Abort) OnUpdate(); });
         }
         void OnUpdate()
         {
-            lock (Adds)
+            try
             {
-                Adds.ForEach(a => mEntitys.Add(a));
-                Adds.Clear();
+                lock (Adds)
+                {
+                    Adds.ForEach(a => mEntitys.Add(a));
+                    Adds.Clear();
+                }
+                mEntitys.ForEach(a => a.Update());
             }
-            mEntitys.ForEach(a => a.Update());
+            catch (Exception e)
+            {
+                Parasitifer.RemovePlayer(this);
+            }
         }
         public ServerEntity Create(int ID)
         {
             ServerEntity mEntity = mPlayer.Create(ID);
-            lock(Adds)
+            mEntity.Parasitifer = this;
+            lock (Adds)
             {
                 Adds.Add(mEntity);
             }
@@ -150,7 +217,14 @@ namespace GameServer
         }
         public Avatar CreateAvater()
         {
-            mAvatar.AddAvatar(mPlayer.CreateAvatar(mAvatar));
+            ServerEntity mEntity = mPlayer.CreateAvatar(mAvatar);
+            mAvatar.AddAvatar(mEntity);
+            mAvatar.Parasitifer = this;
+            mEntity.Parasitifer = this;
+            lock (Adds)
+            {
+                Adds.Add(mEntity);
+            }
             return mAvatar;
         }
     }
@@ -161,7 +235,7 @@ namespace GameServer
         {
 
         }
-        public virtual void OnRemovePlayer(Player mPlayer)
+        public virtual void OnRemovePlayer(ServerPlayer mPlayer)
         {
 
         }
@@ -173,6 +247,7 @@ namespace GameServer
     {
         public static float deltaTime;
     }
+
     public class WorldObject : WorldEntity
     {
         List<ServerEntity> entitys = new List<ServerEntity>();
@@ -182,6 +257,15 @@ namespace GameServer
         public WorldObject()
         {
             Test();
+            //mCorountine.StartCoroutine(SetPoint());
+        }
+        IEnumerator SetPoint()
+        {
+            while(true)
+            {
+                yield return new WaitformSecond(3);
+                entitys.ForEach(a => a.setPosition(position));
+            }
         }
         public override void OnAddPlayer(ServerPlayer mPlayer)
         {
@@ -190,6 +274,10 @@ namespace GameServer
             entitys.ForEach(a => a.SetTarget(Target));
             entitys.ForEach(a => a.setPosition(position));
         }
+        public override void OnRemovePlayer(ServerPlayer mPlayer)
+        {
+            entitys.RemoveAll(a => a.Parasitifer == mPlayer);
+        }
         public ABPath GetNewPath(Vector3 start, Vector3 end)
         {
             // Construct a path with start and end points
@@ -197,9 +285,10 @@ namespace GameServer
 
             return p;
         }
+        static System.Random r = new System.Random();
+
         void Test()
         {
-            System.Random r = new System.Random();
             Target = new Vector3(r.Next(80) - 40, 0, r.Next(80) - 40);
             Target = (Vector3)AstarPath.active.GetNearest(Target).node.position;
             Path path = GetNewPath(position, Target);
@@ -219,92 +308,22 @@ namespace GameServer
         }
         IEnumerator RunPath(Path p)
         {
-            currentWaypointIndex = 0;
-            targetReached = false;
-            bool isfinish = true;
-            while (isfinish)
+            foreach (var path in p.vectorPath)
             {
-                position += CalculateVelocity(p, position,()=> isfinish=false) * Time.deltaTime*3;
-                yield return null;
+                while(XZSqrMagnitude(path, position)>0.4f)
+                {
+                    position += MoveTo(position,path, Time.deltaTime * 3.1f);
+                    yield return null;
+                }
             }
             Test();
         }
-        int currentWaypointIndex = 0;
         protected float XZSqrMagnitude(Vector3 a, Vector3 b)
         {
             float dx = b.x - a.x;
             float dz = b.z - a.z;
             return dx * dx + dz * dz;
         }
-        bool targetReached = false;
-        protected Vector3 CalculateVelocity(Path path, Vector3 currentPosition,System.Action OnTargetReached)
-        {
-            if (path == null || path.vectorPath == null || path.vectorPath.Count == 0) return Vector3.zero;
-
-            List<Vector3> vPath = path.vectorPath;
-
-            if (vPath.Count == 1)
-            {
-                vPath.Insert(0, currentPosition);
-            }
-
-            if (currentWaypointIndex >= vPath.Count) { currentWaypointIndex = vPath.Count - 1; }
-
-            if (currentWaypointIndex <= 1) currentWaypointIndex = 1;
-
-            while (true)
-            {
-                if (currentWaypointIndex < vPath.Count - 1)
-                {
-                    float dist = XZSqrMagnitude(vPath[currentWaypointIndex], currentPosition);
-                    if (dist < 4)
-                    {
-                        currentWaypointIndex++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                else
-                {
-                    break;
-                }
-            }
-            Vector3 dir;
-            Vector3 targetPosition = CalculateTargetPoint(currentPosition, vPath[currentWaypointIndex - 1], vPath[currentWaypointIndex]);
-            dir = targetPosition - currentPosition;
-            dir.y = 0;
-            float targetDist = dir.magnitude;
-            if (currentWaypointIndex == vPath.Count - 1 && targetDist <= 0.2f)
-            {
-                if (!targetReached) { targetReached = true; OnTargetReached(); }
-            }
-            return dir.normalized;
-        }
-        protected Vector3 CalculateTargetPoint(Vector3 p, Vector3 a, Vector3 b)
-        {
-            a.y = p.y;
-            b.y = p.y;
-
-            float magn = (a - b).magnitude;
-            if (magn == 0) return a;
-
-            float closest = AstarMath.Clamp01(AstarMath.NearestPointFactor(a, b, p));
-            Vector3 point = (b - a) * closest + a;
-            float distance = (point - p).magnitude;
-
-            float lookAhead = Mathf.Clamp(1 - distance, 0.0F, 1);
-
-            float offset = lookAhead / magn;
-            offset = Mathf.Clamp(offset + closest, 0.0F, 1.0F);
-            return (b - a) * offset + a;
-        }
-
-        public override void OnRemovePlayer(Player mPlayer)
-        {
-        }
-
         public override void OnUpdate()
         {
             base.OnUpdate();
@@ -313,15 +332,31 @@ namespace GameServer
     }
     public class Avatar : TransportEntity
     {
-        List<ServerEntity> entitys = new List<ServerEntity>();
+        public List<ServerEntity> entitys = new List<ServerEntity>();
+        public ServerPlayer Parasitifer;
         public void AddAvatar(ServerEntity mEntity)
         {
             entitys.Add(mEntity);
+        }
+        public void OnDestroy()
+        {
+            for (int i = 1; i < entitys.Count; i++)
+            {
+                entitys[i].OnExit();
+            }
+        }
+        public void RemoveAvatar(ServerPlayer mPlayer)
+        {
+            entitys.RemoveAll(a => a.Parasitifer == mPlayer);
         }
         public override void SetTarget(float x, float y, float z)
         {
             Vector3 Target = new Vector3(x, y, z);
             entitys.ForEach(a => a.SetTarget(Target));
+        }
+        public override void Skill(int ID)
+        {
+            entitys.ForEach(a => a.Skill(ID));
         }
     }
 }

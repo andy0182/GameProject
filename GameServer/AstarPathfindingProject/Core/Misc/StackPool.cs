@@ -65,8 +65,8 @@ namespace Pathfinding.Util
 		 */
 		public static void Release (Stack<T> stack) {
 #if !ASTAR_NO_POOLING
-			for (int i=0;i<pool.Count;i++)
-				if (pool[i] == stack) UnityEngine.Debug.LogError ("The Stack is released even though it is inside the pool");
+			//for (int i=0;i<pool.Count;i++)
+				//if (pool[i] == stack) UnityEngine.Debug.LogError ("The Stack is released even though it is inside the pool");
 			
 			stack.Clear ();
 			pool.Add (stack);

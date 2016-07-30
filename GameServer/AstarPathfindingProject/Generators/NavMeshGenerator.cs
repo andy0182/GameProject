@@ -148,7 +148,7 @@ and have a low memory footprint because of their smaller size to describe the sa
 
 		public static NNInfo GetNearest (NavMeshGraph graph, GraphNode[] nodes, Vector3 position, NNConstraint constraint, bool accurateNearestNode) {
 			if (nodes == null || nodes.Length == 0) {
-				Debug.LogError ("NavGraph hasn't been generated yet or does not contain any nodes");
+				//Debug.LogError ("NavGraph hasn't been generated yet or does not contain any nodes");
 				return new NNInfo ();
 			}
 
@@ -205,7 +205,7 @@ and have a low memory footprint because of their smaller size to describe the sa
 		public override NNInfo GetNearestForce (Vector3 position, NNConstraint constraint) {
 
 			return GetNearestForce (this, this,position,constraint, accurateNearestNode);
-			//Debug.LogWarning ("This function shouldn't be called since constrained nodes are sent back in the GetNearest call");
+			///Debug.LogWarning ("This function shouldn't be called since constrained nodes are sent back in the GetNearest call");
 
 			//return new NNInfo ();
 		}
@@ -323,7 +323,7 @@ and have a low memory footprint because of their smaller size to describe the sa
 		public static void BuildFunnelCorridor (INavmesh graph, List<GraphNode> path, int startIndex, int endIndex, List<Vector3> left, List<Vector3> right) {
 
 			if (graph == null) {
-				Debug.LogError ("Couldn't cast graph to the appropriate type (graph isn't a Navmesh type graph, it doesn't implement the INavmesh interface)");
+				//Debug.LogError ("Couldn't cast graph to the appropriate type (graph isn't a Navmesh type graph, it doesn't implement the INavmesh interface)");
 				return;
 			}
 
@@ -436,7 +436,7 @@ and have a low memory footprint because of their smaller size to describe the sa
 				node = (graph as NavGraph).GetNearest (tmp_origin, NNConstraint.None).node as TriangleMeshNode;
 
 				if (node == null) {
-					Debug.LogError ("Could not find a valid node to start from");
+					//Debug.LogError ("Could not find a valid node to start from");
 					hit.point = tmp_origin;
 					return true;
 				}
@@ -465,7 +465,7 @@ and have a low memory footprint because of their smaller size to describe the sa
 
 				counter++;
 				if ( counter > 2000 ) {
-					Debug.LogError ("Linecast was stuck in infinite loop. Breaking.");
+					//Debug.LogError ("Linecast was stuck in infinite loop. Breaking.");
 					Pathfinding.Util.ListPool<Vector3>.Release(left);
 					Pathfinding.Util.ListPool<Vector3>.Release(right);
 					return true;
@@ -552,7 +552,7 @@ and have a low memory footprint because of their smaller size to describe the sa
 					}
 
 					//Ok, this is wrong...
-					Debug.LogWarning ("Linecast failing because point not inside node, and line does not hit any edges of it");
+					//Debug.LogWarning ("Linecast failing because point not inside node, and line does not hit any edges of it");
 
 					Pathfinding.Util.ListPool<Vector3>.Release(left);
 					Pathfinding.Util.ListPool<Vector3>.Release(right);
@@ -675,7 +675,7 @@ and have a low memory footprint because of their smaller size to describe the sa
 		[System.Obsolete("Use TriangleMeshNode.ContainsPoint instead")]
 		public static bool ContainsPoint (TriangleMeshNode node, Vector3 pos, Int3[] vertices) {
 			if (!Polygon.IsClockwiseMargin ((Vector3)vertices[node.v0],(Vector3)vertices[node.v1], (Vector3)vertices[node.v2])) {
-				Debug.LogError ("Noes!");
+				//Debug.LogError ("Noes!");
 			}
 
 			if ( 	Polygon.IsClockwiseMargin ((Vector3)vertices[node.v0],(Vector3)vertices[node.v1], pos)
@@ -692,7 +692,7 @@ and have a low memory footprint because of their smaller size to describe the sa
 			Mesh mesh = ObjImporter.ImportFile (objMeshPath);
 
 			if (mesh == null) {
-				Debug.LogError ("Couldn't read .obj file at '"+objMeshPath+"'");
+				//Debug.LogError ("Couldn't read .obj file at '"+objMeshPath+"'");
 				return;
 			}
 
@@ -802,9 +802,9 @@ and have a low memory footprint because of their smaller size to describe the sa
 				}
 
 				if (Polygon.IsColinear (vertices[node.v0],vertices[node.v1],vertices[node.v2])) {
-					Debug.DrawLine ((Vector3)vertices[node.v0],(Vector3)vertices[node.v1],Color.red);
-					Debug.DrawLine ((Vector3)vertices[node.v1],(Vector3)vertices[node.v2],Color.red);
-					Debug.DrawLine ((Vector3)vertices[node.v2],(Vector3)vertices[node.v0],Color.red);
+					//Debug.DrawLine ((Vector3)vertices[node.v0],(Vector3)vertices[node.v1],Color.red);
+					//Debug.DrawLine ((Vector3)vertices[node.v1],(Vector3)vertices[node.v2],Color.red);
+					//Debug.DrawLine ((Vector3)vertices[node.v2],(Vector3)vertices[node.v0],Color.red);
 				}
 
 				// Make sure position is correctly set

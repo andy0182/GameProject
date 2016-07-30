@@ -52,13 +52,10 @@ namespace Pathfinding {
 		}
 
 		void Start () {
-			if (FindObjectsOfType<TileHandlerHelper>().Length > 1) {
-				return;
-			}
 			
 			if (handler == null) {
 				if (AstarPath.active == null || AstarPath.active.astarData.recastGraph == null) {
-					Debug.LogWarning ("No AstarPath object in the scene or no RecastGraph on that AstarPath object");
+					//Debug.LogWarning ("No AstarPath object in the scene or no RecastGraph on that AstarPath object");
 				}
 				
 				handler = new TileHandler(AstarPath.active.astarData.recastGraph);

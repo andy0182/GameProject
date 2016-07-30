@@ -426,7 +426,7 @@ namespace Pathfinding.Voxels {
 				for (int i=0;i<linkedSpanCount;i++) {
 					linkedSpans[i] = tmp[i];
 				}
-				Debug.Log ("Layer estimate too low, doubling size of buffer.\nThis message is harmless.");
+				//Debug.Log ("Layer estimate too low, doubling size of buffer.\nThis message is harmless.");
 			}
 			
 			// Take a node from the recycling stack if possible

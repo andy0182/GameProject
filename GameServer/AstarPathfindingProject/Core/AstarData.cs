@@ -171,18 +171,6 @@ namespace Pathfinding {
 		 * But these references ease the use of the system, so I decided to keep them.\n
 		 */
 		public void UpdateShortcuts () {
-			navmesh = (NavMeshGraph)FindGraphOfType (typeof(NavMeshGraph));
-
-#if !ASTAR_NO_GRID_GRAPH
-			gridGraph = (GridGraph)FindGraphOfType (typeof(GridGraph));
-			layerGridGraph = (LayerGridGraph)FindGraphOfType (typeof(LayerGridGraph));
-#endif
-
-#if !ASTAR_NO_POINT_GRAPH
-			pointGraph = (PointGraph)FindGraphOfType (typeof(PointGraph));
-#endif
-
-			recastGraph = (RecastGraph)FindGraphOfType (typeof(RecastGraph));
 		}
 
 		/** Load from data from #file_cachedStartup */
@@ -195,7 +183,7 @@ namespace Pathfinding {
 				
 				GraphModifier.TriggerEvent (GraphModifier.EventType.PostCacheLoad);
 			} else {
-				Debug.LogError ("Can't load from cache since the cache is empty");
+				//Debug.LogError ("Can't load from cache since the cache is empty");
 			}
 		}
 		
@@ -313,14 +301,14 @@ namespace Pathfinding {
 						DeserializeGraphsPartAdditive (sr);
 						sr.CloseDeserialize();
 					} else {
-						Debug.Log ("Invalid data file (cannot read zip).");
+						//Debug.Log ("Invalid data file (cannot read zip).");
 					}
 				} else {
 					throw new System.ArgumentNullException ("bytes");
 				}
 				active.VerifyIntegrity ();
 			} catch (System.Exception e) {
-				Debug.LogWarning ("Caught exception while deserializing data.\n"+e);
+				//Debug.LogWarning ("Caught exception while deserializing data.\n"+e);
 			}
 			
 		}
@@ -378,7 +366,7 @@ namespace Pathfinding {
 			for (int i=0;i<graphs.Length;i++) {
 				for (int j=i+1;j<graphs.Length;j++) {
 					if (graphs[i] != null && graphs[j] != null && graphs[i].guid == graphs[j].guid) {
-						Debug.LogWarning ("Guid Conflict when importing graphs additively. Imported graph will get a new Guid.\nThis message is (relatively) harmless.");
+						//Debug.LogWarning ("Guid Conflict when importing graphs additively. Imported graph will get a new Guid.\nThis message is (relatively) harmless.");
 						graphs[i].guid = Pathfinding.Util.Guid.NewGuid ();
 						break;
 					}
@@ -458,7 +446,7 @@ namespace Pathfinding {
 		 */
 		[System.Obsolete("Use CreateGraph(System.Type) instead")]
 		public NavGraph CreateGraph (string type) {
-			Debug.Log ("Creating Graph of type '"+type+"'");
+			//Debug.Log ("Creating Graph of type '"+type+"'");
 			
 			for (int i=0;i<graphTypes.Length;i++) {
 				
@@ -466,7 +454,7 @@ namespace Pathfinding {
 					return CreateGraph (graphTypes[i]);
 				}
 			}
-			Debug.LogError ("Graph type ("+type+") wasn't found");
+			//Debug.LogError ("Graph type ("+type+") wasn't found");
 			return null;
 		}
 		
@@ -494,7 +482,7 @@ namespace Pathfinding {
 			}
 			
 			if (graph == null) {
-				Debug.LogError ("No NavGraph of type '"+type+"' could be found");
+				//Debug.LogError ("No NavGraph of type '"+type+"' could be found");
 				return null;
 			}
 			
@@ -515,7 +503,7 @@ namespace Pathfinding {
 			}
 			
 			if (graph == null) {
-				Debug.LogError ("No NavGraph of type '"+type+"' could be found, "+graphTypes.Length+" graph types are avaliable");
+				//Debug.LogError ("No NavGraph of type '"+type+"' could be found, "+graphTypes.Length+" graph types are avaliable");
 				return null;
 			}
 			
@@ -696,7 +684,7 @@ namespace Pathfinding {
 					}
 				}
 			}
-			Debug.LogError ("Graph doesn't exist");
+			//Debug.LogError ("Graph doesn't exist");
 			return -1;
 		}
 		

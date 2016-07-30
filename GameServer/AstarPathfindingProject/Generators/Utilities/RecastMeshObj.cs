@@ -33,31 +33,6 @@ namespace Pathfinding {
 		
 		/** Fills the buffer with all RecastMeshObjs which intersect the specified bounds */
 		public static void GetAllInBounds (List<RecastMeshObj> buffer, Bounds bounds) {
-			if (!Application.isPlaying){
-				RecastMeshObj[] objs = FindObjectsOfType<RecastMeshObj>();
-				for (int i=0;i<objs.Length;i++) {
-					objs[i].RecalculateBounds();
-					if (objs[i].GetBounds ().Intersects (bounds)) {
-						buffer.Add(objs[i]);
-					}
-				}
-				return;
-			} else if (Time.timeSinceLevelLoad == 0) {
-				//Is is not guaranteed that all RecastMeshObj OnEnable functions have been called, so if it is the first frame since loading a new level
-				//try to initialize all RecastMeshObj objects.
-				RecastMeshObj[] objs = FindObjectsOfType<RecastMeshObj>();
-				for (int i=0;i<objs.Length;i++) objs[i].Register();
-			}
-			
-			for (int q=0;q<dynamicMeshObjs.Count;q++) {
-				if (dynamicMeshObjs[q].GetBounds ().Intersects (bounds)) {
-					buffer.Add (dynamicMeshObjs[q]);
-				}
-			}
-			
-			Rect r = Rect.MinMaxRect (bounds.min.x, bounds.min.z, bounds.max.x, bounds.max.z);
-			
-			tree.QueryInBounds (r, buffer);
 		}
 		
 		[HideInInspector]

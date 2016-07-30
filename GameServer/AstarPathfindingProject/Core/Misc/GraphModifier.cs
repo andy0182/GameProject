@@ -18,10 +18,6 @@ namespace Pathfinding {
 		private GraphModifier next;
 		
 		public static void FindAllModifiers () {
-			var arr = FindObjectsOfType<GraphModifier>();
-			for (int i=0;i<arr.Length;i++) {
-				arr[i].OnEnable();
-			}
 		}
 		
 		/** GraphModifier event type.
@@ -58,9 +54,6 @@ namespace Pathfinding {
 					break;
 			case EventType.PostUpdate:
 					while (c != null) { c.OnGraphsPostUpdate(); c = c.next; }
-					break;
-			case EventType.PostCacheLoad:
-					while (c != null) { c.OnPostCacheLoad(); c = c.next; }
 					break;
 			}
 		}

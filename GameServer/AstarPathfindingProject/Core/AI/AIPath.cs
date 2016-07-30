@@ -297,11 +297,6 @@ public class AIPath : System.Runtime.Remoting.CoroutineManager
 			float magn = dir.magnitude;
 			dir /= magn;
 			int steps = (int)(magn/pickNextWaypointDist);
-
-#if ASTARDEBUG
-			Debug.DrawLine (p1,p2,Color.red,1);
-#endif
-
 			for (int i=0;i<=steps;i++) {
 				CalculateVelocity (p1);
 				p1 += dir;
@@ -424,15 +419,6 @@ public class AIPath : System.Runtime.Remoting.CoroutineManager
 		Vector3 forward = tr.forward;
 		float dot = Vector3.Dot (dir.normalized,forward);
 		float sp = speed * Mathf.Max (dot,minMoveScale) * slowdown;
-
-#if ASTARDEBUG
-		Debug.DrawLine (vPath[currentWaypointIndex-1] , vPath[currentWaypointIndex],Color.black);
-		Debug.DrawLine (GetFeetPosition(),targetPosition,Color.red);
-		Debug.DrawRay (targetPosition,Vector3.up, Color.red);
-		Debug.DrawRay (GetFeetPosition(),dir,Color.yellow);
-		Debug.DrawRay (GetFeetPosition(),forward*sp,Color.cyan);
-#endif
-
 		if (Time.deltaTime	> 0) {
 			sp = Mathf.Clamp (sp,0,targetDist/(Time.deltaTime*2));
 		}

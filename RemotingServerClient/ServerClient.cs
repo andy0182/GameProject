@@ -51,6 +51,10 @@ namespace System.Runtime.Remoting
                 if (Queues.Count > 0) Queues.Dequeue()();
             }
         }
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
         IEnumerator Start()
         {
             return OnUpdate();

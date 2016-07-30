@@ -24,7 +24,7 @@ namespace Pathfinding {
 		public void Reset () {
 			if (string.IsNullOrEmpty (guid)) {
 				guid = Pathfinding.Util.Guid.NewGuid ().ToString ();
-				Debug.Log ("Created new GUID - "+guid);
+				//Debug.Log ("Created new GUID - "+guid);
 			} else {
 			}
 		}

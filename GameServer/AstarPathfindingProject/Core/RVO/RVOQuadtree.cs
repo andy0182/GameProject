@@ -187,23 +187,23 @@ namespace Pathfinding.RVO {
 
 		void DebugDrawRec ( int i, Rect r ) {
 
-			Debug.DrawLine ( new Vector3(r.xMin,0,r.yMin), new Vector3(r.xMax,0,r.yMin), Color.white );
-			Debug.DrawLine ( new Vector3(r.xMax,0,r.yMin), new Vector3(r.xMax,0,r.yMax), Color.white );
-			Debug.DrawLine ( new Vector3(r.xMax,0,r.yMax), new Vector3(r.xMin,0,r.yMax), Color.white );
-			Debug.DrawLine ( new Vector3(r.xMin,0,r.yMax), new Vector3(r.xMin,0,r.yMin), Color.white );
+			//Debug.DrawLine ( new Vector3(r.xMin,0,r.yMin), new Vector3(r.xMax,0,r.yMin), Color.white );
+			//Debug.DrawLine ( new Vector3(r.xMax,0,r.yMin), new Vector3(r.xMax,0,r.yMax), Color.white );
+			//Debug.DrawLine ( new Vector3(r.xMax,0,r.yMax), new Vector3(r.xMin,0,r.yMax), Color.white );
+			//Debug.DrawLine ( new Vector3(r.xMin,0,r.yMax), new Vector3(r.xMin,0,r.yMin), Color.white );
 
 			if ( nodes[i].child00 != i ) {
 				// Not a leaf node
 				Vector2 c = r.center;
-				DebugDrawRec ( nodes[i].child11, Rect.MinMaxRect ( c.x, c.y, r.xMax, r.yMax ) );
-				DebugDrawRec ( nodes[i].child10, Rect.MinMaxRect ( c.x, r.yMin, r.xMax, c.y ) );
-				DebugDrawRec ( nodes[i].child01, Rect.MinMaxRect ( r.xMin, c.y, c.x, r.yMax ) );
-				DebugDrawRec ( nodes[i].child00, Rect.MinMaxRect ( r.xMin, r.yMin, c.x, c.y ) );
+				//DebugDrawRec ( nodes[i].child11, Rect.MinMaxRect ( c.x, c.y, r.xMax, r.yMax ) );
+				//DebugDrawRec ( nodes[i].child10, Rect.MinMaxRect ( c.x, r.yMin, r.xMax, c.y ) );
+				//DebugDrawRec ( nodes[i].child01, Rect.MinMaxRect ( r.xMin, c.y, c.x, r.yMax ) );
+				//DebugDrawRec ( nodes[i].child00, Rect.MinMaxRect ( r.xMin, r.yMin, c.x, c.y ) );
 			}
 
 			Agent a = nodes[i].linkedList;
 			while ( a != null ) {
-				Debug.DrawLine (nodes[i].linkedList.position+Vector3.up, a.position+Vector3.up, new Color(1,1,0,0.5f));
+				//Debug.DrawLine (nodes[i].linkedList.position+Vector3.up, a.position+Vector3.up, new Color(1,1,0,0.5f));
 				a = a.next;
 			}
 		}

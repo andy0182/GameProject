@@ -928,7 +928,7 @@ namespace Pathfinding {
 
 					counter++;
 					if (counter > 10000) {
-						Debug.LogWarning ("Infinite Loop in Convex Hull Calculation");
+						//Debug.LogWarning ("Infinite Loop in Convex Hull Calculation");
 						break;
 					}
 				} while (pointOnHull != startpoint);

@@ -21,7 +21,7 @@ namespace Pathfinding {
 	[System.Serializable]
 	public class EuclideanEmbedding {
 
-		public HeuristicOptimizationMode mode;
+		public HeuristicOptimizationMode mode= HeuristicOptimizationMode.None;
 
 		public int seed;
 
@@ -118,46 +118,32 @@ namespace Pathfinding {
 			}
 		}
 
-		public void RecalculatePivots () {
-			if ( mode == HeuristicOptimizationMode.None ) {
+		public void RecalculatePivots ()
+        {
+			if ( mode == HeuristicOptimizationMode.None )
+            {
 				pivotCount = 0;
 				pivots = null;
 				return;
 			}
-
+            return;
 			// Reset the random number generator
 			rval = (uint)seed;
 
 			var graphs = AstarPath.active.graphs;
-
 			// Get a List<GraphNode> from a pool
 			var pivotList = Pathfinding.Util.ListPool<GraphNode>.Claim ();
-
-			if ( mode == HeuristicOptimizationMode.Custom ) {
-				if ( pivotPointRoot == null ) throw new System.Exception ("Grid Graph -> heuristicOptimizationMode is HeuristicOptimizationMode.Custom, " +
-				                                                                                 "but no 'customHeuristicOptimizationPivotsRoot' is set");
-
-
+			if ( mode == HeuristicOptimizationMode.Custom )
+            {
 				GetClosestWalkableNodesToChildrenRecursively ( pivotPointRoot, pivotList );
 
-			} else if ( mode == HeuristicOptimizationMode.Random ) {
-
+			} else if ( mode == HeuristicOptimizationMode.Random )
+            {
 				int n = 0;
-
-				for ( int j = 0; j < graphs.Length; j++ ) {
-					/*var ig = graphs[j] as IEuclideanEmbeddingGraph;
-					if ( ig != null ) {
-						ig.CalculateEmbeddingPivots ( this, pivotList );
-					}*/
-
-					/**
-					  * Here we select N random nodes from a stream of nodes.
-					  * Probability of choosing the first N nodes is 1
-					  * Probability of choosing node i is min(N/i,1)
-					  * A selected node will replace a random node of the previously
-					  * selected ones.
-					  */
-					graphs[j].GetNodes (delegate (GraphNode node) {
+				for ( int j = 0; j < graphs.Length; j++ )
+                {
+					graphs[j].GetNodes (delegate (GraphNode node) 
+                    {
 						if ( !node.Destroyed && node.Walkable ) {
 
 
@@ -173,15 +159,17 @@ namespace Pathfinding {
 						return true;
 					});
 				}
-			} else if ( mode == HeuristicOptimizationMode.RandomSpreadOut ) {
-
-				GraphNode first = null;
-
-				if ( pivotPointRoot != null ) {
-					GetClosestWalkableNodesToChildrenRecursively ( pivotPointRoot, pivotList );
-				} else {
-					// Find any node in the graphs
-					for ( int j = 0; j < graphs.Length; j++ ) {
+			} else if ( mode == HeuristicOptimizationMode.RandomSpreadOut )
+            {
+                GraphNode first = null;
+                if ( pivotPointRoot != null )
+                {
+                    GetClosestWalkableNodesToChildrenRecursively( pivotPointRoot, pivotList );
+				} else
+                {
+                    // Find any node in the graphs
+                    for ( int j = 0; j < graphs.Length; j++ )
+                    {
 						graphs[j].GetNodes ( delegate ( GraphNode node ) {
 							if ( node != null && node.Walkable ) {
 								first = node;
@@ -191,21 +179,16 @@ namespace Pathfinding {
 						});
 					}
 
-					if ( first != null ) {
+					if ( first != null )
+                    {
 						pivotList.Add (first);
 					} else {
-						Debug.LogError ("Could not find any walkable node in any of the graphs.");
 						Pathfinding.Util.ListPool<GraphNode>.Release ( pivotList );
 						return;
 					}
 				}
-
-				for ( int i = 0; i < spreadOutCount; i++ ) pivotList.Add (null);
-
-			} else {
-				throw new System.Exception ("Invalid HeuristicOptimizationMode: " + mode );
+                for ( int i = 0; i < spreadOutCount; i++ ) pivotList.Add (null);
 			}
-
 			pivots = pivotList.ToArray();
 
 			Pathfinding.Util.ListPool<GraphNode>.Release ( pivotList );
@@ -224,7 +207,7 @@ namespace Pathfinding {
 					if ( pivots[i] == null )
 						throw new System.Exception ("Invalid pivot nodes (null)");
 
-			Debug.Log ("Recalculating costs...");
+			//Debug.Log ("Recalculating costs...");
 			pivotCount = pivots.Length;
 
 			System.Action<int> startCostCalculation = null;
@@ -294,13 +277,13 @@ namespace Pathfinding {
 						}
 
 						if ( best == -1 ) {
-							Debug.LogError ( "Failed generating random pivot points for heuristic optimizations");
+							//Debug.LogError ( "Failed generating random pivot points for heuristic optimizations");
 							return;
 						}
 
 						pivots[k+1] = fp.pathHandler.GetPathNode (best).node;
 
-						Debug.Log ("Found node at " + pivots[k+1].position  + " with score " + bestScore);
+						//Debug.Log ("Found node at " + pivots[k+1].position  + " with score " + bestScore);
 
 						startCostCalculation ( k+1 );
 					}

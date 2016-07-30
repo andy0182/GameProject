@@ -23,19 +23,7 @@ namespace System.Runtime.Remoting
             }
         }
     }
-    public class MonoBehaviour
-    {
-        static List<MonoBehaviour> ObjectPools = new List<MonoBehaviour>();
-        public static T[] FindObjectsOfType<T>()
-        {
-            return ObjectPools.FindAll(a => a is T).ToArray() as T[];
-        }
-        public static T FindObjectOfType<T>() where T: MonoBehaviour
-        {
-            return ObjectPools.Find(a => a is T) as T;
-        }
-    }
-    public class CoroutineManager : MonoBehaviour
+    public class CoroutineManager
     {
         List<IEnumerator> AddEnumeratos = new List<IEnumerator>();
         List<IEnumerator> m_enumerators = new List<IEnumerator>();
@@ -81,6 +69,25 @@ namespace System.Runtime.Remoting
             lock(RemoveEnumeratos)
             {
                 RemoveEnumeratos.Add(corountine.enumerator);
+            }
+        }
+    }
+    public class WaitformSecond : YieldInstruction
+    {
+        float mSecond;
+        DateTime TimerStart;
+        public WaitformSecond(float Second)
+        {
+            mSecond = Second;
+            TimerStart = DateTime.Now;
+        }
+
+        public bool IsDone
+        {
+            get
+            {
+                float deltaTime = (float)((DateTime.Now - TimerStart).TotalMilliseconds * 0.001f);
+                return deltaTime > mSecond;
             }
         }
     }

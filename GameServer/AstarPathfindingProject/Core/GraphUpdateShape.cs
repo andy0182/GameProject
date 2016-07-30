@@ -47,7 +47,7 @@ namespace Pathfinding {
 			
 			_convexPoints = Polygon.ConvexHull (points);
 			for (int i=0;i<_convexPoints.Length;i++) {
-				Debug.DrawLine (_convexPoints[i],_convexPoints[(i+1) % _convexPoints.Length],Color.green);
+				//Debug.DrawLine (_convexPoints[i],_convexPoints[(i+1) % _convexPoints.Length],Color.green);
 			}
 		}
 		

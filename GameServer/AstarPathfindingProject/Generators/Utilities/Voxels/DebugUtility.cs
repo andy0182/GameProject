@@ -32,7 +32,7 @@ namespace Pathfinding {
 			if (active == null) throw new System.NullReferenceException ();
 
 			if (topVerts.Length != bottomVerts.Length || topVerts.Length != vertexColors.Length) {
-				Debug.LogError ("Array Lengths are not the same");
+				//Debug.LogError ("Array Lengths are not the same");
 				return;
 			}
 

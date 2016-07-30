@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding.RVO;
+using System.Collections.Generic;
+using Pathfinding;
 
 public class Monster : AIPath 
 {
@@ -7,6 +10,10 @@ public class Monster : AIPath
 	int Animator_Z=Animator.StringToHash("Z");
 	int Animator_Speed=Animator.StringToHash("Speed");
 	int Reach=1;
+	protected override void Awake ()
+	{
+		base.Awake ();
+	}
 	protected override void Start ()
 	{
 		base.Start ();
@@ -17,17 +24,13 @@ public class Monster : AIPath
 		base.OnTargetReached ();
 		Reach=0;
 	}
-	void OnAnimatorMove()
-	{
-		Vector3 dir = CalculateVelocity (GetFeetPosition());
-		RotateTowards (targetDirection);
-		Vector3 pos = transform.forward*3*animator.GetFloat(Animator_Z)*Time.deltaTime;
-		transform.Translate(pos,Space.World);
-	}
 	public override void Update ()
 	{
-		float sp=(target.position-transform.position).sqrMagnitude*Reach;
-		animator.SetFloat(Animator_Speed,sp>0.1f?1:0);
+		Vector3 dir = CalculateVelocity (GetFeetPosition());
+		animator.SetFloat(Animator_Speed,dir.sqrMagnitude>0.1f?1:0);
+		RotateTowards (targetDirection);
+		Vector3 pos = dir*animator.GetFloat(Animator_Z);
+		rvoController.Move(pos);
 	}
 	public override void SearchPath ()
 	{

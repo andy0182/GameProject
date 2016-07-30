@@ -248,7 +248,7 @@ public class Seeker : System.Runtime.Remoting.CoroutineManager, ISerializationCa
 					prevOutput = modifiers[i].output;
 				} else {
 
-					UnityEngine.Debug.Log ("Error converting "+(i > 0 ? prevMod.GetType ().Name : "original")+"'s output to "+(modifiers[i].GetType ().Name)+"'s input.\nTry rearranging the modifier priorities on the Seeker.");
+					//UnityEngine.Debug.Log ("Error converting "+(i > 0 ? prevMod.GetType ().Name : "original")+"'s output to "+(modifiers[i].GetType ().Name)+"'s input.\nTry rearranging the modifier priorities on the Seeker.");
 
 					prevOutput = ModifierData.None;
 				}

@@ -355,7 +355,7 @@ namespace Pathfinding {
 			while (true) {
 
 				if (count++ > 1000) {
-					Debug.LogError("!!!");
+					//Debug.LogError("!!!");
 					break;
 				}
 
@@ -636,7 +636,7 @@ namespace Pathfinding {
 
 
 			if (!FindNextCorners (position, currentNode, buffer, numCorners, out lastCorner)) {
-				Debug.LogError ("Oh oh");
+				//Debug.LogError ("Oh oh");
 				buffer.Add (position);
 				return position;
 			}
@@ -826,7 +826,7 @@ namespace Pathfinding {
 				}
 
 	            if (funnelPath.Count > 2000) {
-	                Debug.LogWarning ("Avoiding infinite loop. Remove this check if you have this long paths.");
+	                //Debug.LogWarning ("Avoiding infinite loop. Remove this check if you have this long paths.");
 	                break;
 	            }
 

@@ -37,7 +37,7 @@ namespace Pathfinding.Serialization
 			Type type = Type.GetType (typename);
 			
 			if (System.Type.Equals (type, null)) {
-				Debug.LogError ("Could not find type '"+typename+"'. Cannot deserialize Unity reference");
+				//Debug.LogError ("Could not find type '"+typename+"'. Cannot deserialize Unity reference");
 				return null;
 			}
 			
@@ -112,7 +112,7 @@ namespace Pathfinding.Serialization
 			
 			var arr = (Array)values["values"];
 			if (arr.Length != 16) {
-				Debug.LogError ("Number of elements in matrix was not 16 (got "+arr.Length+")");
+				//Debug.LogError ("Number of elements in matrix was not 16 (got "+arr.Length+")");
 				return m;
 			}
 

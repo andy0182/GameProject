@@ -160,13 +160,6 @@ namespace Pathfinding.RVO {
 
 		public void Awake () {
 			tr = transform;
-
-			var sim = FindObjectOfType<RVOSimulator>();
-			if (sim == null) {
-				Debug.LogError ("No RVOSimulator component found in the scene. Please add one.");
-				return;
-			}
-			simulator = sim.GetSimulator ();
 		}
 
 		public void OnEnable () {

@@ -434,7 +434,7 @@ namespace Pathfinding.Serialization
 				graphs[i].GetNodes (node => {
 					totCount = Math.Max (node.NodeIndex, totCount);
 					if (node.NodeIndex == -1) {
-						Debug.LogError ("Graph contains destroyed nodes. This is a bug.");
+						//Debug.LogError ("Graph contains destroyed nodes. This is a bug.");
 					}
 					return true;
 				});
@@ -564,24 +564,12 @@ namespace Pathfinding.Serialization
 				zip = ZipFile.Read(str);
 			} catch (Exception e) {
 				//Catches exceptions when an invalid zip file is found
-				Debug.LogWarning ("Caught exception when loading from zip\n"+e);
+				//Debug.LogWarning ("Caught exception when loading from zip\n"+e);
 
 				str.Dispose ();
 				return false;
 			}
 			meta = DeserializeMeta (zip["meta"+jsonExt]);
-			
-			if (FullyDefinedVersion(meta.version) > FullyDefinedVersion(AstarPath.Version)) {
-				Debug.LogWarning ("Trying to load data from a newer version of the A* Pathfinding Project\nCurrent version: "+AstarPath.Version+" Data version: "+meta.version +
-				                  "\nThis is usually fine as the stored data is usually backwards and forwards compatible." +
-				                  "\nHowever node data (not settings) can get corrupted between versions, so it is recommended " +
-				                  "to recalculate any caches (those for faster startup) and resave any files. Even if it seems to load fine, it might cause subtle bugs.\n");
-			} else if (FullyDefinedVersion(meta.version) < FullyDefinedVersion(AstarPath.Version)) {
-				Debug.LogWarning ("Trying to load data from an older version of the A* Pathfinding Project\nCurrent version: "+AstarPath.Version+" Data version: "+meta.version+
-						"\nThis is usually fine, it just means you have upgraded to a new version." +
-						"\nHowever node data (not settings) can get corrupted between versions, so it is recommended " +
-						"to recalculate any caches (those for faster startup) and resave any files. Even if it seems to load fine, it might cause subtle bugs.\n");
-			}
 			return true;
 		}
 
@@ -705,9 +693,6 @@ namespace Pathfinding.Serialization
 				graphs[i].GetNodes (delegate (GraphNode node) {
 					
 					totCount = Math.Max (node.NodeIndex, totCount);
-					if (node.NodeIndex == -1) {
-						Debug.LogError ("Graph contains destroyed nodes. This is a bug.");
-					}
 					return true;
 				});
 			}

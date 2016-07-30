@@ -800,8 +800,8 @@ namespace Pathfinding.Voxels {
 					
 					if (ni == -1)
 					{
-						Debug.LogWarning ("Degenerate triangles might have been generated.\n" +
-							"Usually this is not a problem, but if you have a static level, try to modify the graph settings slightly to avoid this edge case.");
+						//Debug.LogWarning ("Degenerate triangles might have been generated.\n" +
+						//	"Usually this is not a problem, but if you have a static level, try to modify the graph settings slightly to avoid this edge case.");
 						return;
 					}
 					x = nx;

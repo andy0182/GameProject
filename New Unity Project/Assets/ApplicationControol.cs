@@ -11,14 +11,17 @@ using System.Reflection;
 public class ApplicationControol : UnityEngine.MonoBehaviour 
 {
 	public GameObject[] PrefabEntityObject;
-	public QueueEX<System.Runtime.Remoting.Action> Queues = new QueueEX<System.Runtime.Remoting.Action>();
-
+	public ClientObject1 mPlayer;
+	public static ApplicationControol Instance;
+	public List<EntityMonoBehaviour> Entitys=new List<EntityMonoBehaviour>();
 	public class ClientObject1 : Player
 	{
+		List<EntityMonoBehaviour> Entitys;
 		GameObject[] PrefabEntityObject;
 		public ClientObject1(GameObject[] PrefabEntityObject)
 		{
 			this.PrefabEntityObject=PrefabEntityObject;
+			Entitys=ApplicationControol.Instance.Entitys;
 		}
 		[ExecuteInMainthead]
 		public override Entity Create(int ID)
@@ -26,6 +29,7 @@ public class ApplicationControol : UnityEngine.MonoBehaviour
 			GameObject tmp=GameObject.Instantiate(PrefabEntityObject[ID]) as GameObject;
 			tmp.SetActive(true);
 			EntityMonoBehaviour go=tmp.AddComponent<EntityMonoBehaviour>();
+			Entitys.Add(go);
 			return go;
 		}
 		[ExecuteInMainthead]
@@ -35,17 +39,19 @@ public class ApplicationControol : UnityEngine.MonoBehaviour
 			tmp.SetActive(true);
 			Avatar go=tmp.AddComponent<Avatar>();
 			go.mAvatar=mEntity;
+			Entitys.Add(go);
 			return go;
 		}
 	}
-	ClientObject1 mPlayer;
-	CoroutineManager mCoroutine=new CoroutineManager();
+	void Awake()
+	{
+		Instance=this;
+	}
 	void Start () 
 	{
-		int random=UnityEngine.Random.Range(1,100);
 		new Thread(()=>
 		{
-			ServerObject.InitConnect(9003+random);
+			ServerObject.InitConnect(0);
 			TransportInterface tmp =ServerObject.GetObject<TransportInterface>("tcp://127.0.0.1:9000/RemotingObject");
 			mPlayer=new ClientObject1(PrefabEntityObject);
 			tmp.Loging(mPlayer);
@@ -53,7 +59,6 @@ public class ApplicationControol : UnityEngine.MonoBehaviour
 	}
 	void Update()
 	{
-		mCoroutine.Update();
 		if(mPlayer!=null)mPlayer.Update();
 	}
 	void OnApplicationQuit()

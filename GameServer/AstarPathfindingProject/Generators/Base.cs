@@ -727,7 +727,7 @@ namespace Pathfinding {
 					numberSame++;
 					//Check if we are hitting the same position all the time, even though we are decrementing the cpos variable
 					if (numberSame > 10) {
-						Debug.LogError ("Infinite Loop when raycasting. Please report this error (arongranberg.com)\n"+cpos+" : "+prevHit);
+						//Debug.LogError ("Infinite Loop when raycasting. Please report this error (arongranberg.com)\n"+cpos+" : "+prevHit);
 						break;
 					}
 				}

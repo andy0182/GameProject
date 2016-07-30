@@ -39,7 +39,7 @@ namespace Pathfinding {
 			throw new System.NotSupportedException ("Method not available on this platform");
 #else
 			if (!File.Exists (filePath)) {
-				Debug.LogError ("No file was found at '"+filePath+"'");
+				//Debug.LogError ("No file was found at '"+filePath+"'");
 				return null;
 			}
 			

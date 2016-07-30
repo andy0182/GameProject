@@ -236,10 +236,6 @@ namespace Pathfinding {
 				for ( int w = 1; w <= mw; w++ ) {
 
 					if ( w >= 20 ) {
-						Debug.LogWarning ("Aborting GetNearest call at maximum distance because it has iterated too many times.\n" +
-						                  "If you get this regularly, check your settings for PointGraph -> <b>Optimize For Sparse Graph</b> and " +
-						                  "PointGraph -> <b>Optimize For 2D</b>.\nThis happens when the closest node was very far away (20*link distance between nodes). " +
-						                  "When optimizing for sparse graphs, getting the nearest node from far away positions is <b>very slow</b>.\n");
 						break;
 					}
 

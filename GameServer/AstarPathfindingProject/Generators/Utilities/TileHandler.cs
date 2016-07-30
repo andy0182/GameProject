@@ -379,8 +379,8 @@ namespace Pathfinding.Util {
 			List<bool> cutsAddedGeom = Pathfinding.Util.ListPool<bool>.Claim();
 
 			if (perturbate > 10) {
-				Debug.LogError ("Too many perturbations aborting : " + mode);
-				Debug.Break();
+				//Debug.LogError ("Too many perturbations aborting : " + mode);
+				//Debug.Break();
 				outVCount = verts.Length;
 				outTCount = tris.Length;
 				outTrisArr = tris;
@@ -421,7 +421,7 @@ namespace Pathfinding.Util {
 						
 						List<IntPoint> cut = cutVertices[j];
 						if (cut.Count == 0) {
-							Debug.LogError ("Zero Length Contour");
+							//Debug.LogError ("Zero Length Contour");
 							cutBounds.Add (new IntRect());
 							cutBoundsY.Add (new Int2(0,0));
 							continue;

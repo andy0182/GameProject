@@ -631,10 +631,10 @@ But this time, edit the setting named "Forward" to "Z forward" (not -Z as it is 
 						}
 					}
 
-					if (containedStatic)
-						Debug.LogWarning ("Some meshes were statically batched. These meshes can not be used for navmesh calculation" +
-							" due to technical constraints.\nDuring runtime scripts cannot access the data of meshes which have been statically batched.\n" +
-							"One way to solve this problem is to use cached startup (Save & Load tab in the inspector) to only calculate the graph when the game is not playing.");
+					//if (containedStatic)
+					//	Debug.LogWarning ("Some meshes were statically batched. These meshes can not be used for navmesh calculation" +
+					//		" due to technical constraints.\nDuring runtime scripts cannot access the data of meshes which have been statically batched.\n" +
+					//		"One way to solve this problem is to use cached startup (Save & Load tab in the inspector) to only calculate the graph when the game is not playing.");
 				}
 
 	#if ASTARDEBUG
@@ -1583,9 +1583,9 @@ But this time, edit the setting named "Forward" to "Z forward" (not -Z as it is 
 
 			if (Math.Abs (t1coord-t2coord) != 1) {
 
-				Debug.Log (tile1.x + " " + tile1.z + " " + tile1.w + " " + tile1.d + "\n"+
-				tile2.x + " " + tile2.z + " " + tile2.w + " " + tile2.d+"\n"+
-				t1x + " " + t1z + " " + t2x + " " + t2z);
+				//Debug.Log (tile1.x + " " + tile1.z + " " + tile1.w + " " + tile1.d + "\n"+
+				//tile2.x + " " + tile2.z + " " + tile2.w + " " + tile2.d+"\n"+
+				//t1x + " " + t1z + " " + t2x + " " + t2z);
 				throw new System.ArgumentException ("Tiles are not adjacent (tile coordinates must differ by exactly 1. Got '" + t1coord + "' and '" + t2coord + "')");
 			}
 
@@ -1777,8 +1777,8 @@ But this time, edit the setting named "Forward" to "Z forward" (not -Z as it is 
 			if (tile.verts.Length > 0xFFFF) throw new System.ArgumentException ("Too many vertices per tile (more than 65535)");
 
 			if (!worldSpace) {
-				if (!Mathf.Approximately (x*tileSizeX*cellSize*Int3.FloatPrecision, (float)Math.Round(x*tileSizeX*cellSize*Int3.FloatPrecision))) Debug.LogWarning ("Possible numerical imprecision. Consider adjusting tileSize and/or cellSize");
-				if (!Mathf.Approximately (z*tileSizeZ*cellSize*Int3.FloatPrecision, (float)Math.Round(z*tileSizeZ*cellSize*Int3.FloatPrecision))) Debug.LogWarning ("Possible numerical imprecision. Consider adjusting tileSize and/or cellSize");
+				//if (!Mathf.Approximately (x*tileSizeX*cellSize*Int3.FloatPrecision, (float)Math.Round(x*tileSizeX*cellSize*Int3.FloatPrecision))) Debug.LogWarning ("Possible numerical imprecision. Consider adjusting tileSize and/or cellSize");
+				//if (!Mathf.Approximately (z*tileSizeZ*cellSize*Int3.FloatPrecision, (float)Math.Round(z*tileSizeZ*cellSize*Int3.FloatPrecision))) Debug.LogWarning ("Possible numerical imprecision. Consider adjusting tileSize and/or cellSize");
 
 				var offset = (Int3)(new Vector3((x * tileSizeX * cellSize),0,(z * tileSizeZ * cellSize)) + forcedBounds.min);
 
@@ -2034,7 +2034,7 @@ But this time, edit the setting named "Forward" to "Z forward" (not -Z as it is 
 			}
 
 			if (extraMeshes.Count == 0) {
-				Debug.LogWarning ("No MeshFilters where found contained in the layers specified by the 'mask' variables");
+				//Debug.LogWarning ("No MeshFilters where found contained in the layers specified by the 'mask' variables");
 
 				return false;
 			}
@@ -2147,7 +2147,7 @@ But this time, edit the setting named "Forward" to "Z forward" (not -Z as it is 
 				int rows = Mathf.Max (4,Mathf.RoundToInt(colliderRasterizeDetail*Mathf.Sqrt(matrix.MultiplyVector(Vector3.one).magnitude)));
 
 				if (rows > 100) {
-					Debug.LogWarning ("Very large detail for some collider meshes. Consider decreasing Collider Rasterize Detail (RecastGraph)");
+					//Debug.LogWarning ("Very large detail for some collider meshes. Consider decreasing Collider Rasterize Detail (RecastGraph)");
 				}
 
 				int cols = rows;

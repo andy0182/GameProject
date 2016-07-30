@@ -377,8 +377,8 @@ namespace Pathfinding.Voxels {
 						uint top = spans[s].next != -1 ? spans[spans[s].next].bottom : VoxelArea.MaxHeight;
 
 						if (bottom > top) {
-							Debug.Log (bottom + " " + top);
-							Debug.DrawLine (new Vector3(x*cellSize,bottom*cellHeight,pz*cellSize)+min, new Vector3(x*cellSize,top*cellHeight,pz*cellSize)+min, Color.yellow, 1);
+							//Debug.Log (bottom + " " + top);
+							//Debug.DrawLine (new Vector3(x*cellSize,bottom*cellHeight,pz*cellSize)+min, new Vector3(x*cellSize,top*cellHeight,pz*cellSize)+min, Color.yellow, 1);
 						}
 						//Debug.DrawRay (p,voxelArea.VectorDirection[d]*cellSize*0.5F,Color.red);
 						if (top - bottom < voxelWalkableHeight) {
@@ -473,7 +473,7 @@ namespace Pathfinding.Voxels {
 			int wd = w*d;
 
 			if (this.voxelWalkableHeight >= 0xFFFF) {
-				Debug.LogWarning ("Too high walkable height to guarantee correctness. Increase voxel height or lower walkable height.");
+				//Debug.LogWarning ("Too high walkable height to guarantee correctness. Increase voxel height or lower walkable height.");
 			}
 
 #if !ASTAR_RECAST_CLASS_BASED_LINKED_LIST
@@ -602,7 +602,7 @@ namespace Pathfinding.Voxels {
 									uint connIdx = (uint)k - nc.index;
 
 									if (connIdx > MaxLayers) {
-										Debug.LogError ("Too many layers");
+										//Debug.LogError ("Too many layers");
 										continue;
 									}
 
@@ -634,7 +634,7 @@ namespace Pathfinding.Voxels {
 			int p1 = (indices[a] & 0x0fffffff) * 4;
 			int p2 = (indices[b] & 0x0fffffff) * 4;
 
-			Debug.DrawLine (ConvertPosCorrZ (verts[p1+0],verts[p1+1],verts[p1+2]),ConvertPosCorrZ (verts[p2+0],verts[p2+1],verts[p2+2]),col);
+			//Debug.DrawLine (ConvertPosCorrZ (verts[p1+0],verts[p1+1],verts[p1+2]),ConvertPosCorrZ (verts[p2+0],verts[p2+1],verts[p2+2]),col);
 		}
 
 		Vector3 ConvertPos (int x, int y, int z) {
@@ -738,7 +738,7 @@ namespace Pathfinding.Voxels {
 		public void ErodeVoxels (int radius) {
 
 			if (radius > 255) {
-				Debug.LogError ("Max Erode Radius is 255");
+				//Debug.LogError ("Max Erode Radius is 255");
 				radius = 255;
 			}
 

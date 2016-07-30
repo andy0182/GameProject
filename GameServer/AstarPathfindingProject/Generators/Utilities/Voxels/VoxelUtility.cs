@@ -92,7 +92,7 @@ namespace Pathfinding.Voxels {
 		}
 		
 		public static void EndTimer (string label) {
-			Debug.Log (label+", process took "+ToMillis(Time.realtimeSinceStartup-lastStartTime)+"ms to complete");
+			//Debug.Log (label+", process took "+ToMillis(Time.realtimeSinceStartup-lastStartTime)+"ms to complete");
 		}	
 		
 		public static float lastAdditiveTimerStart;
@@ -109,7 +109,7 @@ namespace Pathfinding.Voxels {
 			additiveTimer += Time.realtimeSinceStartup-lastAdditiveTimerStart;
 			
 			if (log) {
-				Debug.Log (label+", process took "+ToMillis(additiveTimer)+"ms to complete");
+				//Debug.Log (label+", process took "+ToMillis(additiveTimer)+"ms to complete");
 			}
 				
 			lastAdditiveTimerStart = Time.realtimeSinceStartup;

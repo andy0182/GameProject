@@ -257,7 +257,7 @@ namespace Pathfinding.RVO.Sampled {
 			const float steps = 40.0f;
 			for ( int i = 0; i <= steps; i++ ) {
 				Vector3 c = new Vector3 (Mathf.Cos(Mathf.Lerp(a0,a1,i/steps))*radius, 0, Mathf.Sin(Mathf.Lerp(a0,a1,i/steps))*radius);
-				Debug.DrawLine ( p+prev, p+c, col );
+				//Debug.DrawLine ( p+prev, p+c, col );
 				prev = c;
 			}
 		}
@@ -276,8 +276,8 @@ namespace Pathfinding.RVO.Sampled {
 			p1 += circleCenter;
 			p2 += circleCenter;
 
-			Debug.DrawRay ( To3D(p1), To3D(p1t).normalized*100, Color.black );
-			Debug.DrawRay ( To3D(p2), To3D(p2t).normalized*100, Color.black );
+			//Debug.DrawRay ( To3D(p1), To3D(p1t).normalized*100, Color.black );
+			//Debug.DrawRay ( To3D(p2), To3D(p2t).normalized*100, Color.black );
 		}
 
 		static void DrawCross ( Vector2 p, float size = 1 ) {
@@ -286,8 +286,8 @@ namespace Pathfinding.RVO.Sampled {
 
 		static void DrawCross ( Vector2 p, Color col, float size = 1 ) {
 			size *= 0.5f;
-			Debug.DrawLine ( new Vector3(p.x,0,p.y) - Vector3.right*size, new Vector3(p.x,0,p.y) + Vector3.right*size, col );
-			Debug.DrawLine ( new Vector3(p.x,0,p.y) - Vector3.forward*size, new Vector3(p.x,0,p.y) + Vector3.forward*size, col );
+			//Debug.DrawLine ( new Vector3(p.x,0,p.y) - Vector3.right*size, new Vector3(p.x,0,p.y) + Vector3.right*size, col );
+			//Debug.DrawLine ( new Vector3(p.x,0,p.y) - Vector3.forward*size, new Vector3(p.x,0,p.y) + Vector3.forward*size, col );
 		}
 
 		public struct VO {
@@ -752,15 +752,15 @@ namespace Pathfinding.RVO.Sampled {
 							if ( weight > 0 ) dir /= weight;
 
 							//Vector2 d3 = simulator.SampleDensity (p+position2D);
-							Debug.DrawRay ( To3D(p), To3D(d2*0.00f), Color.blue );
+							//Debug.DrawRay ( To3D(p), To3D(d2*0.00f), Color.blue );
 							//simulator.Plot (p, Rainbow(weight*simulator.colorScale));
 
 							float sc = 0;
 							Vector2 p0 = p - Vector2.one*WorldPlotWidth*0.5f;
 							Vector2 p1 = Trace (vos, voCount, p0, 0.01f, out sc);
-							if ( (p0 - p1).sqrMagnitude < Sqr(WorldPlotWidth / PlotWidth)*2.6f ) {
-								Debug.DrawRay ( To3D(p1 + position2D), Vector3.up*1, Color.red);
-							}
+							//if ( (p0 - p1).sqrMagnitude < Sqr(WorldPlotWidth / PlotWidth)*2.6f ) {
+							//	Debug.DrawRay ( To3D(p1 + position2D), Vector3.up*1, Color.red);
+							//}
 						}
 					}
 				}
@@ -1023,7 +1023,7 @@ namespace Pathfinding.RVO.Sampled {
 				dir *= step;
 				Vector2 prev = p;
 				p += dir;
-				if (DebugDraw) Debug.DrawLine ( To3D(prev)+position, To3D(p)+position, Rainbow(0.1f/score) * new Color(1,1,1,0.2f));
+				//if (DebugDraw) Debug.DrawLine ( To3D(prev)+position, To3D(p)+position, Rainbow(0.1f/score) * new Color(1,1,1,0.2f));
 			}
 
 

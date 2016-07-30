@@ -721,19 +721,6 @@ namespace Pathfinding {
 		public override string ToString () {
 			return "[x: "+xmin+"..."+xmax+", y: " + ymin +"..."+ymax+"]";
 		}
-
-		/** Draws some debug lines representing the rect */
-		public void DebugDraw (Matrix4x4 matrix, Color col) {
-			Vector3 p1 = matrix.MultiplyPoint3x4 (new Vector3(xmin,0,ymin));
-			Vector3 p2 = matrix.MultiplyPoint3x4 (new Vector3(xmin,0,ymax));
-			Vector3 p3 = matrix.MultiplyPoint3x4 (new Vector3(xmax,0,ymax));
-			Vector3 p4 = matrix.MultiplyPoint3x4 (new Vector3(xmax,0,ymin));
-
-			Debug.DrawLine (p1,p2,col);
-			Debug.DrawLine (p2,p3,col);
-			Debug.DrawLine (p3,p4,col);
-			Debug.DrawLine (p4,p1,col);
-		}
 	}
 }
 
